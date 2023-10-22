@@ -15,7 +15,7 @@ void Game::update()
 {
     if (MouseL.down())
     {
-        changeScene(U"Title");
+        changeScene(State::Result);
     }
 }
 

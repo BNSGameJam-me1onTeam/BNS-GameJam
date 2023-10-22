@@ -37,6 +37,10 @@
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
+		C1A54A3F2AE51F6C004DEA82 /* SelectStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A3D2AE51F6C004DEA82 /* SelectStage.cpp */; };
+		C1A54A422AE51F86004DEA82 /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A402AE51F86004DEA82 /* Story.cpp */; };
+		C1A54A452AE51F96004DEA82 /* Result.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A432AE51F96004DEA82 /* Result.cpp */; };
+		C1A54A482AE51FC7004DEA82 /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A462AE51FC7004DEA82 /* SelectEquipment.cpp */; };
 		DF2839A42AE518A200498A2F /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A22AE518A200498A2F /* Title.cpp */; };
 		DF2839A72AE518C100498A2F /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A52AE518C100498A2F /* Game.cpp */; };
 /* End PBXBuildFile section */
@@ -74,6 +78,15 @@
 		2C5C471026B4F08E005E8C85 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = ../../lib/macOS/zlib/libzlib.a; sourceTree = "<group>"; };
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
+		C1A54A3D2AE51F6C004DEA82 /* SelectStage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SelectStage.cpp; path = ../../../../../../../Documents/SelectStage.cpp; sourceTree = "<group>"; };
+		C1A54A3E2AE51F6C004DEA82 /* SelectStage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = SelectStage.hpp; path = ../../../../../../../Documents/SelectStage.hpp; sourceTree = "<group>"; };
+		C1A54A402AE51F86004DEA82 /* Story.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Story.cpp; path = ../../../../../../../Documents/Story.cpp; sourceTree = "<group>"; };
+		C1A54A412AE51F86004DEA82 /* Story.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Story.hpp; path = ../../../../../../../Documents/Story.hpp; sourceTree = "<group>"; };
+		C1A54A432AE51F96004DEA82 /* Result.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Result.cpp; path = ../../../../../../../Documents/Result.cpp; sourceTree = "<group>"; };
+		C1A54A442AE51F96004DEA82 /* Result.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Result.hpp; path = ../../../../../../../Documents/Result.hpp; sourceTree = "<group>"; };
+		C1A54A462AE51FC7004DEA82 /* SelectEquipment.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SelectEquipment.cpp; path = ../../../../../../../Documents/SelectEquipment.cpp; sourceTree = "<group>"; };
+		C1A54A472AE51FC7004DEA82 /* SelectEquipment.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = SelectEquipment.hpp; path = ../../../../../../../Documents/SelectEquipment.hpp; sourceTree = "<group>"; };
+		C1A54A4B2AE52809004DEA82 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Common.hpp; path = ../../../../../../../Documents/Common.hpp; sourceTree = "<group>"; };
 		DF2839A22AE518A200498A2F /* Title.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
 		DF2839A32AE518A200498A2F /* Title.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
 		DF2839A52AE518C100498A2F /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -141,11 +154,8 @@
 		2C1778981CE0AA7C00BB8AD0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C1A54A3C2AE51E09004DEA82 /* Scenes */,
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
-				DF2839A52AE518C100498A2F /* Game.cpp */,
-				DF2839A62AE518C100498A2F /* Game.hpp */,
-				DF2839A22AE518A200498A2F /* Title.cpp */,
-				DF2839A32AE518A200498A2F /* Title.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -182,6 +192,26 @@
 				2C5C46DC26B4F00D005E8C85 /* libcurl.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C1A54A3C2AE51E09004DEA82 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DF2839A22AE518A200498A2F /* Title.cpp */,
+				DF2839A32AE518A200498A2F /* Title.hpp */,
+				C1A54A3D2AE51F6C004DEA82 /* SelectStage.cpp */,
+				C1A54A3E2AE51F6C004DEA82 /* SelectStage.hpp */,
+				C1A54A402AE51F86004DEA82 /* Story.cpp */,
+				C1A54A412AE51F86004DEA82 /* Story.hpp */,
+				C1A54A462AE51FC7004DEA82 /* SelectEquipment.cpp */,
+				C1A54A472AE51FC7004DEA82 /* SelectEquipment.hpp */,
+				DF2839A52AE518C100498A2F /* Game.cpp */,
+				DF2839A62AE518C100498A2F /* Game.hpp */,
+				C1A54A432AE51F96004DEA82 /* Result.cpp */,
+				C1A54A442AE51F96004DEA82 /* Result.hpp */,
+				C1A54A4B2AE52809004DEA82 /* Common.hpp */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,7 +282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1A54A3F2AE51F6C004DEA82 /* SelectStage.cpp in Sources */,
+				C1A54A482AE51FC7004DEA82 /* SelectEquipment.cpp in Sources */,
 				DF2839A72AE518C100498A2F /* Game.cpp in Sources */,
+				C1A54A452AE51F96004DEA82 /* Result.cpp in Sources */,
+				C1A54A422AE51F86004DEA82 /* Story.cpp in Sources */,
 				DF2839A42AE518A200498A2F /* Title.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
 			);

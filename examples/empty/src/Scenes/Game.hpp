@@ -1,9 +1,6 @@
 // Game.hpp
 #pragma once
-#include <Siv3D.hpp>
-//#include "SceneManager.hpp"
-
-using App = SceneManager<String>;
+#include "Common.hpp"
 
 class Game : public App::Scene
 {
