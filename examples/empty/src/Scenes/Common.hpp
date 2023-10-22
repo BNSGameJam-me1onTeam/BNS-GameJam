@@ -16,10 +16,10 @@ enum class State
 struct GameData
 {
     // コントローラーを使用する
-    use_controller = false;
+    bool use_controller = false;
     // プレイヤーデータ [役割:0-おたま 1-具材, 装備id:0~3]
-    Array<int32>　p1_data = [0, 0];
-    Array<int32>　p2_data = [0, 0];
+    Array<int32> p1_data = {0, 0};
+    Array<int32> p2_data = {0, 0};
     // ステージid 0:鍋, 1:パフェ
     int32 stage_id = 0;
 };
