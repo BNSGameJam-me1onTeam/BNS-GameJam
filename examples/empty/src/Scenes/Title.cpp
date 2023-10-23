@@ -8,21 +8,35 @@ Title::Title(const InitData& init) : IScene{ init }
 
 Title::~Title()
 {
-    Print << U"Title::~Title()";
+    Print << U"UseController: " << getData().use_controller;
 }
 
 void Title::update()
 {
-    if (MouseL.down())
+    if (KeyEnter.down())
     {
+        getData().use_controller = false;
         changeScene(State::SelectStage);
     }
+    
+    
+    alpha += Scene::DeltaTime()*0.7;
+    if (alpha >= 2.0){
+        alpha -= 2.0;
+    }
+
 }
 
 void Title::draw() const
 {
     Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
-    FontAsset(U"TitleFont")(getData().use_controller).drawAt(400, 100);
-    Circle{ Cursor::Pos(), 50 }.draw(Palette::Orange);
+    
+    FontAsset(U"TitleFont")(U"鍋パニック！逆襲の具材たち（適）").drawAt(Scene::Center()-Point{0, 100});
+    
+    if (alpha > 1.0){
+        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.5, 1.0, 1.0-(alpha-1.0)});
+    }else{
+        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.5, 1.0, alpha});
+    }
 }
 

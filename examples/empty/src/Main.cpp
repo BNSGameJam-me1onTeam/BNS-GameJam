@@ -1,4 +1,3 @@
-#include <Siv3D.hpp>
 // シーン関連
 #include "Title.hpp"
 #include "SelectStage.hpp"
@@ -11,7 +10,9 @@
 void Main()
 {
     Window::Resize(1280, 720);
+    //仮
     FontAsset::Register(U"TitleFont", 60, Typeface::Heavy);
+    FontAsset::Register(U"NormalFont", 48, Typeface::Bold);
 
     // シーンマネージャーを作成
     App manager;
