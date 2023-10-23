@@ -34,9 +34,9 @@ void Title::draw() const
     FontAsset(U"TitleFont")(U"鍋パニック！逆襲の具材たち（適）").drawAt(Scene::Center()-Point{0, 100});
     
     if (alpha > 1.0){
-        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.5, 1.0, 1.0-(alpha-1.0)});
+        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
     }else{
-        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.5, 1.0, alpha});
+        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, alpha});
     }
 }
 
