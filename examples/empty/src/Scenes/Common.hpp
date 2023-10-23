@@ -21,7 +21,7 @@ struct GameData
     Array<int32> p1_data = {-1, -1};
     Array<int32> p2_data = {-1, -1};
     // ステージid 0:鍋, 1:パフェ
-    int32 stage_id = 0;
+    int32 stage_id = 1;
 };
 
 using App = SceneManager<State, GameData>;

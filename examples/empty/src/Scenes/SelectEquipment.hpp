@@ -12,8 +12,8 @@ public:
     void draw() const override;
 
 private:
-    Array<Texture> otama_soubi;
-    Array<Texture> guzai_soubi;
+    Array<Texture> seme_soubi;
+    Array<Texture> nige_soubi;
     Point p1_cursor{0, 0};
     Point p2_cursor{0, 0};
 };

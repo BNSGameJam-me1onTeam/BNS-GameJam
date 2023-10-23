@@ -4,11 +4,11 @@
 SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 {
     for (auto i : step(4)){
-//        otama_soubi << Texture{U"example/texture/otama_soubi_{}.png"_fmt(i+1)};
-//        guzai_soubi << Texture{U"example/texture/guzai_soubi_{}.png"_fmt(i+1)};
+//        seme_soubi << Texture{U"example/texture/{}/seme_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
+//        nige_soubi << Texture{U"example/texture/{}/nige_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
 
-        otama_soubi << Texture{U"example/texture/otama_soubi_1.png"};
-        guzai_soubi << Texture{U"example/texture/guzai_soubi_1.png"};
+        seme_soubi << Texture{U"example/texture/{}/seme_soubi_1.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe")};
+        nige_soubi << Texture{U"example/texture/{}/nige_soubi_1.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe")};
     }
 }
 
@@ -74,20 +74,20 @@ void SelectEquipment::draw() const
     
     // サムネ一覧の出力
     for (auto i : step(4)){
-        otama_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -250));
-        guzai_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -50));
+        seme_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -250));
+        nige_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -50));
     }
     
     // 選択中の装備表示
     if(getData().p1_data[0] == 0){
-        otama_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+        seme_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
     }else if(getData().p1_data[0] == 1){
-        guzai_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+        nige_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
     }
     if(getData().p2_data[0] == 0){
-        otama_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
+        seme_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
     }else if(getData().p2_data[0] == 1){
-        guzai_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
+        nige_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
     }
     
 }

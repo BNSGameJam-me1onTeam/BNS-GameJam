@@ -25,7 +25,7 @@ void Main()
     manager.add<Result>(State::Result);
     
     // テスト用
-    // manager.init(State::SelectEquipment);
+    manager.init(State::SelectEquipment);
 
     while (System::Update())
     {
