@@ -14,15 +14,15 @@ SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 
 SelectEquipment::~SelectEquipment()
 {
-    Print << U"Role(0: otama, 1: guzai): p1→{}, p2→{}"_fmt(getData().p1_data[0], getData().p2_data[0]);
-    Print << U"EqipmentID: p1→{}, p2→{}"_fmt(getData().p1_data[1], getData().p2_data[1]);
+    Print << U"Role(0: otama, 1: guzai): p1→{}, p2→{}"_fmt(getData().p1_data.role, getData().p2_data.role);
+    Print << U"EqipmentID: p1→{}, p2→{}"_fmt(getData().p1_data.eqid, getData().p2_data.eqid);
 }
 
 void SelectEquipment::update()
 {
     // ゲームスタート
-    int32 p1 = getData().p1_data[0];
-    int32 p2 = getData().p2_data[0];
+    int32 p1 = getData().p1_data.role;
+    int32 p2 = getData().p2_data.role;
     if (KeySpace.down() and p1 != -1 and p2 != -1 and p1 == !p2)
     {
         changeScene(State::Game);
@@ -42,7 +42,8 @@ void SelectEquipment::update()
         p1_cursor.x = Clamp(++(p1_cursor.x), 0, 3);
     }
     if (KeyQ.down()){
-        getData().p1_data = {p1_cursor.y, p1_cursor.x};
+        getData().p1_data.role = p1_cursor.y;
+        getData().p1_data.eqid = p1_cursor.x;
     }
     
     //Player2の処理
@@ -59,7 +60,8 @@ void SelectEquipment::update()
         p2_cursor.x = Clamp(++(p2_cursor.x), 0, 3);
     }
     if (KeySlash.down()){
-        getData().p2_data = {p2_cursor.y, p2_cursor.x};
+        getData().p2_data.role = p2_cursor.y;
+        getData().p2_data.eqid = p2_cursor.x;
     }
 }
 
@@ -79,15 +81,15 @@ void SelectEquipment::draw() const
     }
     
     // 選択中の装備表示
-    if(getData().p1_data[0] == 0){
-        seme_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
-    }else if(getData().p1_data[0] == 1){
-        nige_soubi[getData().p1_data[1]].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+    if(getData().p1_data.role == 0){
+        seme_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+    }else if(getData().p1_data.role == 1){
+        nige_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-480, 200));
     }
-    if(getData().p2_data[0] == 0){
-        seme_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
-    }else if(getData().p2_data[0] == 1){
-        nige_soubi[getData().p2_data[1]].resized(256).drawAt(Scene::Center()+Point(480, 200));
+    if(getData().p2_data.role == 0){
+        seme_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(480, 200));
+    }else if(getData().p2_data.role == 1){
+        nige_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(480, 200));
     }
     
 }
