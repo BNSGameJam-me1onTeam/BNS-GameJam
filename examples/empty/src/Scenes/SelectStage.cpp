@@ -25,7 +25,10 @@ void SelectStage::update()
 
 void SelectStage::draw() const
 {
-    Scene::SetBackground(ColorF(0.2, 0.8, 0.6));
+    RoundRect{ 140, 210, 300, 300, 10 }.draw(Palette::Orange);
+    RoundRect{ 490, 210, 300, 300, 10 }.draw(Palette::Skyblue);
+    RoundRect{ 840, 210, 300, 300, 10 }.draw(Palette::Black);
+    Scene::SetBackground(ColorF(1, 1, 1));
     m_texture.drawAt(Cursor::Pos());
 }
 
