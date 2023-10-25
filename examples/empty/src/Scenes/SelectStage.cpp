@@ -13,6 +13,10 @@ SelectStage::~SelectStage()
 
 void SelectStage::update()
 {
+    if (KeyQ.down())
+    {
+        changeScene(State::Title);
+    }
     if (KeySpace.down())
     {
         changeScene(State::Story);
