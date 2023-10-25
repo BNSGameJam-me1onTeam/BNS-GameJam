@@ -13,4 +13,6 @@ public:
 
 private:
     Texture m_texture;
+    int cursor = 0;
+    int select = 0;
 };
