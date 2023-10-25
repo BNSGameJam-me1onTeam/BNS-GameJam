@@ -1,10 +1,8 @@
 // Title.cpp
 #include "Title.hpp"
+#include "Controller.hpp"
 
-Title::Title(const InitData& init) : IScene{ init }
-{
-    Print << U"Title::Title()";
-}
+Title::Title(const InitData& init) : IScene{ init } {}
 
 Title::~Title()
 {
@@ -19,10 +17,21 @@ void Title::update()
         changeScene(State::SelectStage);
     }
     
-    
     alpha += Scene::DeltaTime()*0.7;
     if (alpha >= 2.0){
         alpha -= 2.0;
+    }
+    
+    //getWherePush();
+    ClearPrint();
+
+    Array<int32> inputdata = getWherePush();
+    if(inputdata[0] != -1 and inputdata[1] != -1)
+    {
+        getData().p1_data.conindex = inputdata[0];
+        getData().p1_data.conkey = inputdata[1];
+        getData().use_controller = true;
+        changeScene(State::SelectStage);
     }
 
 }
@@ -34,9 +43,9 @@ void Title::draw() const
     FontAsset(U"TitleFont")(U"鍋パニック！逆襲の具材たち（適）").drawAt(Scene::Center()-Point{0, 100});
     
     if (alpha > 1.0){
-        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
     }else{
-        FontAsset(U"NormalFont")(U"Press Enter or A to Start").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, alpha});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, alpha});
     }
 }
 

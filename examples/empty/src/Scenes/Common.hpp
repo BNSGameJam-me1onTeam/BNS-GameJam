@@ -12,12 +12,13 @@ enum class State
     Result,
 };
 
-// プレイヤーデータ role:役割, eqid:装備id, conid:コントローラid
+// プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex, conkey: 確定ボタン
 struct PlayerData
 {
     int32 role;
     int32 eqid;
-    String conid;
+    int32 conindex;
+    uint32 conkey;
 };
 
 // 共有するデータ
@@ -26,8 +27,8 @@ struct GameData
     // コントローラーを使用する
     bool use_controller = false;
     // プレイヤーデータ
-    PlayerData p1_data{-1, -1, U""};
-    PlayerData p2_data{-1, -1, U""};
+    PlayerData p1_data{-1, -1, -1};
+    PlayerData p2_data{-1, -1, -1};
     // ステージid 0:鍋, 1:パフェ
     int32 stage_id = 0;
 };

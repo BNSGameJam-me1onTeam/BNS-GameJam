@@ -14,8 +14,8 @@ SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 
 SelectEquipment::~SelectEquipment()
 {
-    Print << U"Role(0: otama, 1: guzai): p1→{}, p2→{}"_fmt(getData().p1_data.role, getData().p2_data.role);
-    Print << U"EqipmentID: p1→{}, p2→{}"_fmt(getData().p1_data.eqid, getData().p2_data.eqid);
+    Print << U"Player1 Role: {}, EquipmentID: {}"_fmt(getData().p1_data.role, getData().p1_data.eqid);
+    Print << U"Player2 Role: {}, EquipmentID: {}"_fmt(getData().p2_data.role, getData().p2_data.eqid);
 }
 
 void SelectEquipment::update()
