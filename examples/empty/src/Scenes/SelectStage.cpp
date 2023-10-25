@@ -13,7 +13,7 @@ SelectStage::~SelectStage()
 
 void SelectStage::update()
 {
-    if (MouseL.down())
+    if (KeySpace.down())
     {
         changeScene(State::Story);
     }
