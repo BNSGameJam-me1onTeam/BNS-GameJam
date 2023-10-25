@@ -12,13 +12,22 @@ enum class State
     Result,
 };
 
-// プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex, conkey: 確定ボタン
+// プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex
 struct PlayerData
 {
     int32 role;
     int32 eqid;
     int32 conindex;
-    uint32 conkey;
+};
+
+// キーコンフィグ
+struct InputData
+{
+    InputGroup Left;
+    InputGroup Right;
+    InputGroup Up;
+    InputGroup Down;
+    InputGroup Confirm;
 };
 
 // 共有するデータ
@@ -29,6 +38,9 @@ struct GameData
     // プレイヤーデータ
     PlayerData p1_data{-1, -1, -1};
     PlayerData p2_data{-1, -1, -1};
+    // キーコンフィグ
+    InputData p1_input{KeyA, KeyD, KeyW, KeyS, KeyQ};
+    InputData p2_input{KeyLeft, KeyRight, KeyUp, KeyDown, KeyShift};
     // ステージid 0:鍋, 1:パフェ
     int32 stage_id = 0;
 };

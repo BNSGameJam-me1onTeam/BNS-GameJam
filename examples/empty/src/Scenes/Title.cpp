@@ -22,18 +22,19 @@ void Title::update()
         alpha -= 2.0;
     }
     
-    //getWherePush();
-    ClearPrint();
-
+    // P1コントローラ設定
     Array<int32> inputdata = getWherePush();
     if(inputdata[0] != -1 and inputdata[1] != -1)
     {
         getData().p1_data.conindex = inputdata[0];
-        getData().p1_data.conkey = inputdata[1];
+        getData().p1_input.Up = Gamepad(inputdata[0]).povUp;
+        getData().p1_input.Down = Gamepad(inputdata[0]).povDown;
+        getData().p1_input.Left = Gamepad(inputdata[0]).povLeft;
+        getData().p1_input.Right = Gamepad(inputdata[0]).povRight;
+        getData().p1_input.Confirm = Gamepad(inputdata[0]).buttons[inputdata[1]];
         getData().use_controller = true;
         changeScene(State::SelectStage);
     }
-
 }
 
 void Title::draw() const

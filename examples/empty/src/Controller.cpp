@@ -8,7 +8,7 @@ Array<int32> getWherePush()
     
     for(int32 i : step(size))
     {
-        if (const auto gamepad = Gamepad(0))
+        if (const auto gamepad = Gamepad(i))
         {
             for (auto [j, button] : Indexed(gamepad.buttons))
             {
@@ -23,4 +23,3 @@ Array<int32> getWherePush()
 
     return result;
 }
-

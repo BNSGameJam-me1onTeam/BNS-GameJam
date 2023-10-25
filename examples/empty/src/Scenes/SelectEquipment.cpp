@@ -1,5 +1,6 @@
 // SelectEquipment.cpp
 #include "SelectEquipment.hpp"
+#include "Controller.hpp"
 
 SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 {
@@ -28,40 +29,56 @@ void SelectEquipment::update()
         changeScene(State::Game);
     }
     
-    //Player1の処理
-    if (KeyW.down()){
+    //Player1のカーソル処理
+    if (getData().p1_input.Up.down()){
         p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
     }
-    if (KeyS.down()){
+    if (getData().p1_input.Down.down()){
         p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
     }
-    if (KeyA.down()){
+    if (getData().p1_input.Left.down()){
         p1_cursor.x = Clamp(--(p1_cursor.x), 0, 3);
     }
-    if (KeyD.down()){
+    if (getData().p1_input.Right.down()){
         p1_cursor.x = Clamp(++(p1_cursor.x), 0, 3);
     }
-    if (KeyQ.down()){
+    if (getData().p1_input.Confirm.down()){
         getData().p1_data.role = p1_cursor.y;
         getData().p1_data.eqid = p1_cursor.x;
     }
     
-    //Player2の処理
-    if (KeyUp.down()){
-        p2_cursor.y = Clamp(--(p2_cursor.y), 0, 1);
+    //Player2のカーソル処理
+    if(!getData().use_controller or getData().p2_data.conindex != -1)
+    {
+        if (getData().p2_input.Up.down()){
+            p2_cursor.y = Clamp(--(p2_cursor.y), 0, 1);
+        }
+        if (getData().p2_input.Down.down()){
+            p2_cursor.y = Clamp(++(p2_cursor.y), 0, 1);
+        }
+        if (getData().p2_input.Left.down()){
+            p2_cursor.x = Clamp(--(p2_cursor.x), 0, 3);
+        }
+        if (getData().p2_input.Right.down()){
+            p2_cursor.x = Clamp(++(p2_cursor.x), 0, 3);
+        }
+        if (getData().p2_input.Confirm.down()){
+            getData().p2_data.role = p2_cursor.y;
+            getData().p2_data.eqid = p2_cursor.x;
+        }
     }
-    if (KeyDown.down()){
-        p2_cursor.y = Clamp(++(p2_cursor.y), 0, 1);
-    }
-    if (KeyLeft.down()){
-        p2_cursor.x = Clamp(--(p2_cursor.x), 0, 3);
-    }
-    if (KeyRight.down()){
-        p2_cursor.x = Clamp(++(p2_cursor.x), 0, 3);
-    }
-    if (KeySlash.down()){
-        getData().p2_data.role = p2_cursor.y;
-        getData().p2_data.eqid = p2_cursor.x;
+    else{
+        // P2コントローラ設定
+        Array<int32> inputdata = getWherePush();
+        if(inputdata[0] != -1 and inputdata[1] != -1 and inputdata[0] != getData().p1_data.conindex)
+        {
+            getData().p2_data.conindex = inputdata[0];
+            getData().p2_input.Up = Gamepad(inputdata[0]).povUp;
+            getData().p2_input.Down = Gamepad(inputdata[0]).povDown;
+            getData().p2_input.Left = Gamepad(inputdata[0]).povLeft;
+            getData().p2_input.Right = Gamepad(inputdata[0]).povRight;
+            getData().p2_input.Confirm = Gamepad(inputdata[0]).buttons[inputdata[1]];
+        }
     }
 }
 
