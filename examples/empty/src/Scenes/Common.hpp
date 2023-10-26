@@ -40,7 +40,7 @@ struct GameData
     PlayerData p2_data{-1, -1, -1};
     // キーコンフィグ
     InputData p1_input{KeyA, KeyD, KeyW, KeyS, KeyQ};
-    InputData p2_input{KeyLeft, KeyRight, KeyUp, KeyDown, KeyShift};
+    InputData p2_input{KeyLeft, KeyRight, KeyUp, KeyDown, KeySlash};
     // ステージid 0:鍋, 1:パフェ
     int32 stage_id = 0;
 };
