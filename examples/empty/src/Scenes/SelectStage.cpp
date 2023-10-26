@@ -10,16 +10,20 @@ SelectStage::~SelectStage()
 {
     Print << U"SelectStage::~SelectStage()";
 }
+SelectStage::~update()
+{
+    Print << "getData().stage_id";
+}
 
 void SelectStage::update()
 {
     if (KeyA.down() && select != 0)
     {
-        select -= 1;
+        getData().stage_id -= 1;
     }
     if (KeyD.down() && select != 2)
     {
-        select += 1;
+        getData().stage_id += 1;
     }
     if (KeyQ.down())
     {
