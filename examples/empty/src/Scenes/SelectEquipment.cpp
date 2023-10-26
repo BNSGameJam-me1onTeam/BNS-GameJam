@@ -92,6 +92,13 @@ void SelectEquipment::draw() const
 {
     bg.resized(1280).drawAt(Scene::Center());
     
+    // 2Pのコントローラー設定の催促
+    if (getData().use_controller and getData().p2_data.conindex == -1)
+    {
+        FontAsset(U"NormalFont")(U"2Pの人はコントローラーを接続して").drawAt(Scene::Center()+Point{0, 155}, ColorF{1.0, 1.0, 1.0});
+        FontAsset(U"NormalFont")(U"任意のボタン(決定ボタン)を教えてください").drawAt(Scene::Center()+Point{0, 185}, ColorF{1.0, 1.0, 1.0});
+    }
+    
     // ゲームスタートの文字
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
