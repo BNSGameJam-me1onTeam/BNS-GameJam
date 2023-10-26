@@ -17,7 +17,7 @@ void Title::update()
         changeScene(State::SelectStage);
     }
     
-    alpha += Scene::DeltaTime()*0.7;
+    alpha += Scene::DeltaTime()*0.5;
     if (alpha >= 2.0){
         alpha -= 2.0;
     }
@@ -44,9 +44,11 @@ void Title::draw() const
     FontAsset(U"TitleFont")(U"鍋パニック！逆襲の具材たち（適）").drawAt(Scene::Center()-Point{0, 250});
     
     if (alpha > 1.0){
-        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
+        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
     }else{
-        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 100}, ColorF{0.0, 0.0, 0.0, alpha});
+        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0, alpha});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{0.0, 0.0, 0.0, alpha});
     }
 }
 
