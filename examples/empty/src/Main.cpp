@@ -13,7 +13,8 @@ void Main()
     Window::SetTitle(U"鍋パニック！逆襲の具材たち（適）");
     //仮
     FontAsset::Register(U"TitleFont", 60, Typeface::Heavy);
-    FontAsset::Register(U"NormalFont", 40, Typeface::Bold);
+    FontAsset::Register(U"LargeFont", 40, Typeface::Bold);
+    FontAsset::Register(U"NormalFont", 28, Typeface::Bold);
 
     // シーンマネージャーを作成
     App manager;
@@ -26,7 +27,7 @@ void Main()
     manager.add<Result>(State::Result);
     
     // テスト用
-    //manager.init(State::Result);
+    manager.init(State::SelectEquipment);
 
     while (System::Update())
     {

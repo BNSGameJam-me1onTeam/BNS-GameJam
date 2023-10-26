@@ -4,12 +4,9 @@
 
 SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 {
-    for (auto i : step(4)){
-//        seme_soubi << Texture{U"example/texture/{}/seme_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
-//        nige_soubi << Texture{U"example/texture/{}/nige_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
-
-        seme_soubi << Texture{U"example/texture/{}/seme_soubi_1.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe")};
-        nige_soubi << Texture{U"example/texture/{}/nige_soubi_1.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe")};
+    for (auto i : step(3)){
+        seme_soubi << Texture{U"example/texture/{}/seme_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
+        nige_soubi << Texture{U"example/texture/{}/nige_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
     }
 }
 
@@ -37,10 +34,10 @@ void SelectEquipment::update()
         p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
     }
     if (getData().p1_input.Left.down()){
-        p1_cursor.x = Clamp(--(p1_cursor.x), 0, 3);
+        p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
     }
     if (getData().p1_input.Right.down()){
-        p1_cursor.x = Clamp(++(p1_cursor.x), 0, 3);
+        p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
     }
     if (getData().p1_input.Confirm.down()){
         getData().p1_data.role = p1_cursor.y;
@@ -57,10 +54,10 @@ void SelectEquipment::update()
             p2_cursor.y = Clamp(++(p2_cursor.y), 0, 1);
         }
         if (getData().p2_input.Left.down()){
-            p2_cursor.x = Clamp(--(p2_cursor.x), 0, 3);
+            p2_cursor.x = Clamp(--(p2_cursor.x), 0, 2);
         }
         if (getData().p2_input.Right.down()){
-            p2_cursor.x = Clamp(++(p2_cursor.x), 0, 3);
+            p2_cursor.x = Clamp(++(p2_cursor.x), 0, 2);
         }
         if (getData().p2_input.Confirm.down()){
             getData().p2_data.role = p2_cursor.y;
@@ -88,25 +85,25 @@ void SelectEquipment::draw() const
     FontAsset(U"NormalFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0});
     
     //カーソルの出力
-    Rect{Arg::center(Scene::Center()+Point{p1_cursor.x*200-300, p1_cursor.y*200-250}), 150}.draw(ColorF{Palette::Blue, 0.5});
-    Rect{Arg::center(Scene::Center()+Point{p2_cursor.x*200-300, p2_cursor.y*200-250}), 150}.draw(ColorF{Palette::Red, 0.5});
+    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*230, (p1_cursor.y-1)*230}), 210}.draw(ColorF{Palette::Blue, 0.5});
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*230, (p2_cursor.y-1)*230}), 210}.draw(ColorF{Palette::Red, 0.5});
     
     // サムネ一覧の出力
-    for (auto i : step(4)){
-        seme_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -250));
-        nige_soubi[i].resized(128).drawAt(Scene::Center()+Point(i*200-300, -50));
+    for (auto i : step(3)){
+        seme_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*230, -230));
+        nige_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*230, 0));
     }
     
     // 選択中の装備表示
     if(getData().p1_data.role == 0){
-        seme_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+        seme_soubi[getData().p1_data.eqid].resized(192).drawAt(Scene::Center()+Point(-500, 220));
     }else if(getData().p1_data.role == 1){
-        nige_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-480, 200));
+        nige_soubi[getData().p1_data.eqid].resized(192).drawAt(Scene::Center()+Point(-500, 220));
     }
     if(getData().p2_data.role == 0){
-        seme_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(480, 200));
+        seme_soubi[getData().p2_data.eqid].resized(192).drawAt(Scene::Center()+Point(500, 220));
     }else if(getData().p2_data.role == 1){
-        nige_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(480, 200));
+        nige_soubi[getData().p2_data.eqid].resized(192).drawAt(Scene::Center()+Point(500, 220));
     }
     
 }
