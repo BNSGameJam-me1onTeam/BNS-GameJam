@@ -34,15 +34,15 @@ struct InputData
 struct GameData
 {
     // コントローラーを使用する
-    bool use_controller = false;
+    bool use_controller;
     // プレイヤーデータ
-    PlayerData p1_data{-1, -1, -1};
-    PlayerData p2_data{-1, -1, -1};
+    PlayerData p1_data;
+    PlayerData p2_data;
     // キーコンフィグ
-    InputData p1_input{KeyA, KeyD, KeyW, KeyS, KeyQ};
-    InputData p2_input{KeyLeft, KeyRight, KeyUp, KeyDown, KeySlash};
+    InputData p1_input;
+    InputData p2_input;
     // ステージid 0:鍋, 1:パフェ
-    int32 stage_id = 0;
+    int32 stage_id;
 };
 
 using App = SceneManager<State, GameData>;

@@ -2,7 +2,15 @@
 #include "Title.hpp"
 #include "Controller.hpp"
 
-Title::Title(const InitData& init) : IScene{ init } {}
+Title::Title(const InitData& init) : IScene{ init }
+{
+    getData().use_controller = false;
+    getData().p1_data = {-1, -1, -1};
+    getData().p2_data = {-1, -1, -1};
+    getData().p1_input = {KeyA, KeyD, KeyW, KeyS, KeyQ};
+    getData().p2_input = {KeyLeft, KeyRight, KeyUp, KeyDown, KeySlash};
+    getData().stage_id = 0;
+}
 
 Title::~Title()
 {
