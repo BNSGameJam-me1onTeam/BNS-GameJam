@@ -89,16 +89,21 @@ void SelectEquipment::draw() const
 {
     bg.resized(1280).drawAt(Scene::Center());
     
-    if (alpha > 1.0){
-        FontAsset(U"LargeFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, 1.0-(alpha-1.0)});
-    }else{
-        FontAsset(U"LargeFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, alpha});
+    int32 p1 = getData().p1_data.role;
+    int32 p2 = getData().p2_data.role;
+    if (p1 != -1 and p2 != -1 and p1 == !p2)
+    {
+        if (alpha > 1.0){
+            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, 1.0-(alpha-1.0)});
+        }else{
+            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, alpha});
+        }
     }
     
     // サムネ用の下地を出力
     for (auto i : step(3)){
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.draw(ColorF{Palette::White});
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.draw(ColorF{Palette::White});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.draw(ColorF{0.8, 0.8, 0.8});
     }
     
     // カーソルの出力
