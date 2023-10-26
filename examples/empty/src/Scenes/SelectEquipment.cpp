@@ -63,6 +63,12 @@ void SelectEquipment::update()
             getData().p2_data.role = p2_cursor.y;
             getData().p2_data.eqid = p2_cursor.x;
         }
+        
+        // 点滅用
+        alpha += Scene::DeltaTime();
+        if (alpha >= 2.0){
+            alpha -= 2.0;
+        }
     }
     else{
         // P2コントローラ設定
@@ -81,29 +87,40 @@ void SelectEquipment::update()
 
 void SelectEquipment::draw() const
 {
-    Scene::SetBackground(ColorF{ 1.0, 1.0, 1.0 });
-    FontAsset(U"NormalFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0});
+    bg.resized(1280).drawAt(Scene::Center());
     
-    //カーソルの出力
-    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*230, (p1_cursor.y-1)*230}), 210}.draw(ColorF{Palette::Blue, 0.5});
-    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*230, (p2_cursor.y-1)*230}), 210}.draw(ColorF{Palette::Red, 0.5});
+    if (alpha > 1.0){
+        FontAsset(U"LargeFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, 1.0-(alpha-1.0)});
+    }else{
+        FontAsset(U"LargeFont")(U"Press Space to Start Game").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, alpha});
+    }
     
-    // サムネ一覧の出力
+    // サムネ用の下地を出力
     for (auto i : step(3)){
-        seme_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*230, -230));
-        nige_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*230, 0));
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.draw(ColorF{Palette::White});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.draw(ColorF{Palette::White});
+    }
+    
+    // カーソルの出力
+    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Blue, 0.5});;
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Red, 0.5});;
+    
+    // サムネ一覧の表示
+    for (auto i : step(3)){
+        seme_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, -220));
+        nige_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, 0));
     }
     
     // 選択中の装備表示
     if(getData().p1_data.role == 0){
-        seme_soubi[getData().p1_data.eqid].resized(192).drawAt(Scene::Center()+Point(-500, 220));
+        seme_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-500, 220));
     }else if(getData().p1_data.role == 1){
-        nige_soubi[getData().p1_data.eqid].resized(192).drawAt(Scene::Center()+Point(-500, 220));
+        nige_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-500, 220));
     }
     if(getData().p2_data.role == 0){
-        seme_soubi[getData().p2_data.eqid].resized(192).drawAt(Scene::Center()+Point(500, 220));
+        seme_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(500, 220));
     }else if(getData().p2_data.role == 1){
-        nige_soubi[getData().p2_data.eqid].resized(192).drawAt(Scene::Center()+Point(500, 220));
+        nige_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(500, 220));
     }
     
 }
