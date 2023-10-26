@@ -23,6 +23,7 @@ void SelectEquipment::update()
     int32 p2 = getData().p2_data.role;
     if (KeySpace.down() and p1 != -1 and p2 != -1 and p1 == !p2)
     {
+        start.playOneShot();
         changeScene(State::Game);
     }
     
@@ -39,9 +40,10 @@ void SelectEquipment::update()
     if (getData().p1_input.Right.down()){
         p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
     }
-    if (getData().p1_input.Confirm.down()){
+    if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
         getData().p1_data.role = p1_cursor.y;
         getData().p1_data.eqid = p1_cursor.x;
+        select.playOneShot();
     }
     
     //Player2のカーソル処理
@@ -59,9 +61,10 @@ void SelectEquipment::update()
         if (getData().p2_input.Right.down()){
             p2_cursor.x = Clamp(++(p2_cursor.x), 0, 2);
         }
-        if (getData().p2_input.Confirm.down()){
+        if (getData().p2_input.Confirm.down() and !(getData().p2_data.role == p2_cursor.y and getData().p2_data.eqid == p2_cursor.x)){
             getData().p2_data.role = p2_cursor.y;
             getData().p2_data.eqid = p2_cursor.x;
+            select.playOneShot();
         }
         
         // 点滅用
@@ -89,6 +92,7 @@ void SelectEquipment::draw() const
 {
     bg.resized(1280).drawAt(Scene::Center());
     
+    // ゲームスタートの文字
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
     if (p1 != -1 and p2 != -1 and p1 == !p2)
