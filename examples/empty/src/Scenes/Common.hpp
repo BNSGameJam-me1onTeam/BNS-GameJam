@@ -12,16 +12,37 @@ enum class State
     Result,
 };
 
+// プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex
+struct PlayerData
+{
+    int32 role;
+    int32 eqid;
+    int32 conindex;
+};
+
+// キーコンフィグ
+struct InputData
+{
+    InputGroup Left;
+    InputGroup Right;
+    InputGroup Up;
+    InputGroup Down;
+    InputGroup Confirm;
+};
+
 // 共有するデータ
 struct GameData
 {
     // コントローラーを使用する
-    bool use_controller = false;
-    // プレイヤーデータ [役割:0-おたま 1-具材, 装備id:0~3]
-    Array<int32> p1_data = {0, 0};
-    Array<int32> p2_data = {0, 0};
+    bool use_controller;
+    // プレイヤーデータ
+    PlayerData p1_data;
+    PlayerData p2_data;
+    // キーコンフィグ
+    InputData p1_input;
+    InputData p2_input;
     // ステージid 0:鍋, 1:パフェ
-    int32 stage_id = 0;
+    int32 stage_id;
 };
 
 using App = SceneManager<State, GameData>;

@@ -10,5 +10,8 @@ public:
 
     void update() override;
     void draw() const override;
+
+private:
+    double alpha = 0.0;
 };
 
