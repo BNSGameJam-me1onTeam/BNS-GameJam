@@ -118,8 +118,8 @@ void SelectEquipment::draw() const
     }
     
     // カーソルの出力
-    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Blue, 0.5});;
-    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Red, 0.5});;
+    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Red, 0.5});
     
     // サムネ一覧の表示
     for (auto i : step(3)){

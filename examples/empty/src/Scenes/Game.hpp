@@ -13,5 +13,8 @@ public:
 
 private:
     Texture m_texture;
+    bool miniGame = false;
+    Texture p1_img;
+    Texture p2_img;
 };
 

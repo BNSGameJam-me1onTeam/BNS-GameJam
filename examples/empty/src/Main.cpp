@@ -27,7 +27,7 @@ void Main()
     manager.add<Result>(State::Result);
     
     // テスト用
-    //manager.init(State::SelectEquipment);
+    //manager.init(State::Game);
 
     while (System::Update())
     {
