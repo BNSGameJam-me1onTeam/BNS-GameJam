@@ -1,9 +1,10 @@
 // Result.cpp
 #include "Result.hpp"
 
-Result::Result(const InitData& init) : IScene{ init }
+Result::Result(const InitData& init) : IScene{ init }, winner{0}
 {
-    Print << U"Result::Result()";
+    if(winner){winnerAnimation = VideoTexture{U"example/video/winseme.mp4", Loop::Yes};}
+    else{winnerAnimation = VideoTexture{U"example/video/guzaiwin.mp4", Loop::Yes};}
 }
 
 Result::~Result()
@@ -22,7 +23,7 @@ void Result::update()
 void Result::draw() const
 {
     Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
-    FontAsset(U"TitleFont")(U"My Game").drawAt(400, 100);
-    Circle{ Cursor::Pos(), 50 }.draw(Palette::Orange);
+    winnerAnimation.advance();
+    winnerAnimation.drawAt(Scene::Center());
 }
 
