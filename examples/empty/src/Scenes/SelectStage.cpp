@@ -1,5 +1,6 @@
 // SelectStage.cpp
 #include "SelectStage.hpp"
+#include "Controller.hpp"
 
 SelectStage::SelectStage(const InitData& init) : IScene{ init }, m_texture{ U"🐈"_emoji }
 {
@@ -13,12 +14,12 @@ SelectStage::~SelectStage()
 
 void SelectStage::update()
 {
-    if (KeyA.down() && getData().stage_id != 0)
+    if ((getData().p1_input.Left.down() || getData().p2_input.Left.down()) && getData().stage_id != 0)
     {
         getData().stage_id -= 1;
         // Print << getData().stage_id;
     }
-    if (KeyD.down() && getData().stage_id != 2)
+    if ((getData().p1_input.Right.down() || getData().p2_input.Right.down()) && getData().stage_id != 2)
     {
         getData().stage_id += 1;
         // Print << getData().stage_id;
