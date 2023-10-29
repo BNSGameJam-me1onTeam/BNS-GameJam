@@ -10,9 +10,9 @@
 void Main()
 {
     Window::Resize(1280, 720);
-    Window::SetTitle(U"鍋パニック！逆襲の具材たち（適）");
+    Window::SetTitle(U"鍋パニック！逆襲の具材たち");
     //仮
-    FontAsset::Register(U"TitleFont", 60, Typeface::Heavy);
+    FontAsset::Register(U"CountFont", 300, Typeface::Heavy);
     FontAsset::Register(U"LargeFont", 40, Typeface::Bold);
     FontAsset::Register(U"NormalFont", 28, Typeface::Bold);
 
@@ -27,7 +27,7 @@ void Main()
     manager.add<Result>(State::Result);
     
     // テスト用
-    //manager.init(State::Game);
+//    manager.init(State::Game);
 
     while (System::Update())
     {

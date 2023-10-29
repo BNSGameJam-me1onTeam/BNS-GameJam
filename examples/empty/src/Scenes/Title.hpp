@@ -13,5 +13,6 @@ public:
 
 private:
     double alpha = 0.0;
+    VideoTexture titleAnimation{U"example/video/title.mp4", Loop::Yes};
 };
 

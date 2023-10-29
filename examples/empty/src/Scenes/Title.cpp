@@ -49,14 +49,15 @@ void Title::draw() const
 {
     Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
     
-    FontAsset(U"TitleFont")(U"鍋パニック！逆襲の具材たち（適）").drawAt(Scene::Center()-Point{0, 250});
+    titleAnimation.advance();
+    titleAnimation.drawAt(Scene::Center());
     
     if (alpha > 1.0){
-        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
-        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{0.0, 0.0, 0.0, 1.0-(alpha-1.0)});
+        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{Palette::Black, 1.0-(alpha-1.0)});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{Palette::Black, 1.0-(alpha-1.0)});
     }else{
-        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{0.0, 0.0, 0.0, alpha});
-        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{0.0, 0.0, 0.0, alpha});
+        FontAsset(U"LargeFont")(U"コントローラの任意のボタン，またはEnterを押してください").drawAt(Scene::Center()+Point{0, 200}, ColorF{Palette::Black, alpha});
+        FontAsset(U"NormalFont")(U"コントローラの場合，押したボタンが確定ボタンに設定されます").drawAt(Scene::Center()+Point{0, 250}, ColorF{Palette::Black, alpha});
     }
 }
 
