@@ -13,5 +13,6 @@ public:
 
 private:
     Texture textureStageOden;
+    Texture textureComingSoon;
     int cursor = 0;
 };
