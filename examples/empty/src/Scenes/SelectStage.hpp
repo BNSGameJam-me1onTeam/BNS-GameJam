@@ -12,6 +12,6 @@ public:
     void draw() const override;
 
 private:
-    Texture m_texture;
+    Texture textureStageOden;
     int cursor = 0;
 };
