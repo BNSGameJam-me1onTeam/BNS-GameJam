@@ -109,18 +109,14 @@ void SelectEquipment::draw() const
         FontAsset(U"NormalFont")(U"2Pの人はコントローラーを接続して").drawAt(Scene::Center()+Point{0, 155}, ColorF{1.0, 1.0, 1.0});
         FontAsset(U"NormalFont")(U"任意のボタン(決定ボタン)を教えてください").drawAt(Scene::Center()+Point{0, 185}, ColorF{1.0, 1.0, 1.0});
     }
-    else
-    {
-        FontAsset(U"LargeFont")(U"キャラクターを選択しよう").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
-    }
     
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
     
     // サムネ用の下地を出力
     for (auto i : step(3)){
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
     }
     
     // タイトルに戻るボタン
@@ -132,11 +128,13 @@ void SelectEquipment::draw() const
     {
         Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
         FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0});
+        FontAsset(U"LargeFont")(U"ゲームを始めよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
     }
     else
     {
         Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8, 0.5});
         FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0, 0.5});
+        FontAsset(U"LargeFont")(U"キャラクターを選択しよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
     }
     
     // カーソル
