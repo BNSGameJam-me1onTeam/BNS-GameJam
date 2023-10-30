@@ -18,15 +18,9 @@ SelectEquipment::~SelectEquipment()
 
 void SelectEquipment::update()
 {
-    // ゲームスタート
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
-    if (KeySpace.down() and p1 != -1 and p2 != -1 and p1 == !p2)
-    {
-        start.playOneShot();
-        changeScene(State::Game);
-    }
-    
+
     //Player1のカーソル処理
     if (getData().p1_input.Left.down() and (p1_cursor.x == 0 or p1_cursor.x == -1))
     {
@@ -35,6 +29,18 @@ void SelectEquipment::update()
     else if(p1_cursor.x == -1 and getData().p1_input.Confirm.down())
     {
         changeScene(State::Title);
+    }
+    else if (getData().p1_input.Right.down() and (p1_cursor.x == 2 or p1_cursor.x == 3) and p1 != -1 and p2 != -1 and p1 == !p2)
+    {
+        p1_cursor.x = 3;
+    }
+    else if(p1_cursor.x == 3 and getData().p1_input.Confirm.down())
+    {
+        if (p1 != -1 and p2 != -1 and p1 == !p2)
+        {
+            start.playOneShot();
+            changeScene(State::Game);
+        }
     }
     else
     {
@@ -77,12 +83,6 @@ void SelectEquipment::update()
             getData().p2_data.eqid = p2_cursor.x;
             select.playOneShot();
         }
-        
-        // 点滅用
-        alpha += Scene::DeltaTime();
-        if (alpha >= 2.0){
-            alpha -= 2.0;
-        }
     }
     else{
         // P2コントローラ設定
@@ -109,18 +109,13 @@ void SelectEquipment::draw() const
         FontAsset(U"NormalFont")(U"2Pの人はコントローラーを接続して").drawAt(Scene::Center()+Point{0, 155}, ColorF{1.0, 1.0, 1.0});
         FontAsset(U"NormalFont")(U"任意のボタン(決定ボタン)を教えてください").drawAt(Scene::Center()+Point{0, 185}, ColorF{1.0, 1.0, 1.0});
     }
+    else
+    {
+        FontAsset(U"LargeFont")(U"キャラクターを選択しよう").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
+    }
     
-    // ゲームスタートの文字
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
-    if (p1 != -1 and p2 != -1 and p1 == !p2)
-    {
-        if (alpha > 1.0){
-            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, 1.0-(alpha-1.0)});
-        }else{
-            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, alpha});
-        }
-    }
     
     // サムネ用の下地を出力
     for (auto i : step(3)){
@@ -132,10 +127,26 @@ void SelectEquipment::draw() const
     Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 90}.rounded(20).draw(ColorF{0.8, 0.8, 0.8});
     FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-500, -110});
     
+    // ゲームを始めるボタン
+    if(p1 != -1 and p2 != -1 and p1 == !p2)
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(20).draw(ColorF{0.8, 0.8, 0.8});
+        FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0});
+    }
+    else
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(20).draw(ColorF{0.8, 0.8, 0.8, 0.5});
+        FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0, 0.5});
+    }
+    
     // カーソル
     if (p1_cursor.x == -1)
     {
         Rect{Arg::center(Scene::Center()+Point{-500, -110}), 210, 70}.rounded(10).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    else if (p1_cursor.x == 3)
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 210, 70}.rounded(10).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
     }
     else
     {
