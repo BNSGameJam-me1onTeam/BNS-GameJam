@@ -28,22 +28,33 @@ void SelectEquipment::update()
     }
     
     //Player1のカーソル処理
-    if (getData().p1_input.Up.down()){
-        p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
+    if (getData().p1_input.Left.down() and (p1_cursor.x == 0 or p1_cursor.x == -1))
+    {
+        p1_cursor.x = -1;
     }
-    if (getData().p1_input.Down.down()){
-        p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
+    else if(p1_cursor.x == -1 and getData().p1_input.Confirm.down())
+    {
+        changeScene(State::Title);
     }
-    if (getData().p1_input.Left.down()){
-        p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
-    }
-    if (getData().p1_input.Right.down()){
-        p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
-    }
-    if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
-        getData().p1_data.role = p1_cursor.y;
-        getData().p1_data.eqid = p1_cursor.x;
-        select.playOneShot();
+    else
+    {
+        if (getData().p1_input.Up.down()){
+            p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
+        }
+        if (getData().p1_input.Down.down()){
+            p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
+        }
+        if (getData().p1_input.Left.down()){
+            p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
+        }
+        if (getData().p1_input.Right.down()){
+            p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
+        }
+        if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
+            getData().p1_data.role = p1_cursor.y;
+            getData().p1_data.eqid = p1_cursor.x;
+            select.playOneShot();
+        }
     }
     
     //Player2のカーソル処理
@@ -113,13 +124,24 @@ void SelectEquipment::draw() const
     
     // サムネ用の下地を出力
     for (auto i : step(3)){
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.draw(ColorF{0.8, 0.8, 0.8});
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(20).draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(20).draw(ColorF{0.8, 0.8, 0.8});
     }
     
-    // カーソルの出力
-    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
-    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Red, 0.5});
+    // タイトルに戻るボタン
+    Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 90}.rounded(20).draw(ColorF{0.8, 0.8, 0.8});
+    FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-500, -110});
+    
+    // カーソル
+    if (p1_cursor.x == -1)
+    {
+        Rect{Arg::center(Scene::Center()+Point{-500, -110}), 210, 70}.rounded(10).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    else
+    {
+        Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.rounded(14).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.rounded(14).drawFrame(0, 10, ColorF{Palette::Red, 0.5});
     
     // サムネ一覧の表示
     for (auto i : step(3)){
