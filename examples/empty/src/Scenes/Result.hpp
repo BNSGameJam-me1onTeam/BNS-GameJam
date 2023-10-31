@@ -12,6 +12,5 @@ public:
     void draw() const override;
 
 private:
-    int32 winner;
     VideoTexture winnerAnimation;
 };

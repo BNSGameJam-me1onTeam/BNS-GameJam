@@ -10,6 +10,7 @@ Title::Title(const InitData& init) : IScene{ init }
     getData().p1_input = {KeyA, KeyD, KeyW, KeyS, KeyQ};
     getData().p2_input = {KeyLeft, KeyRight, KeyUp, KeyDown, KeySlash};
     getData().stage_id = 0;
+    getData().winner = 0;
     bgm.play();
 }
 

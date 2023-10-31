@@ -1,19 +1,24 @@
 // Result.cpp
 #include "Result.hpp"
 
-Result::Result(const InitData& init) : IScene{ init }, winner{0}
+Result::Result(const InitData& init) : IScene{ init }
 {
-    if(winner){winnerAnimation = VideoTexture{U"example/video/winseme.mp4", Loop::Yes};}
-    else{winnerAnimation = VideoTexture{U"example/video/guzaiwin.mp4", Loop::Yes};}
+    if (getData().winner == 0 or getData().winner == 1)
+    {
+        int8 winner_id = getData().winner ^ getData().p1_data.role;
+        winnerAnimation = VideoTexture{U"example/video/{}win.mp4"_fmt(winner_id ? U"guzai" : U"otama"), Loop::Yes};
+    }
 }
 
-Result::~Result()
-{
-    Print << U"Result::~Result()";
-}
+Result::~Result() {}
 
 void Result::update()
 {
+    if(winnerAnimation.isEmpty())
+    {
+        changeScene(State::Title);
+        Print << U"ERROR";
+    }
     if (MouseL.down())
     {
         changeScene(State::Title);

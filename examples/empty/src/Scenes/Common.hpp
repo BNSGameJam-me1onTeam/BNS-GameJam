@@ -12,7 +12,7 @@ enum class State
     Result,
 };
 
-// プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex
+// プレイヤーデータ role:役割(0:攻め, 1:逃げ), eqid:装備id, conindex:コントローラーindex
 struct PlayerData
 {
     int8 role;
@@ -43,6 +43,8 @@ struct GameData
     InputData p2_input;
     // ステージid 0:鍋, 1:パフェ
     int8 stage_id;
+    // 勝者 0:P1 1:P2
+    int8 winner;
 };
 
 using App = SceneManager<State, GameData>;
