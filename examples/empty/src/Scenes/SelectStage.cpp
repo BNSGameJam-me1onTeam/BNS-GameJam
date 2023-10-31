@@ -15,7 +15,7 @@ constexpr Point NORMAL_FONT_OFFSET = {430, 180};   // 通常フォントのオ�
 // コンストラクタ: ステージセレクトの開始時に呼び出される
 SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
-      textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
+      textureStageOden(U"example/IMG_055111.png"),        // おでんステージのテクスチャ
       textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
 {
     Print << U"SelectStage::SelectStage()";    // デバッグメッセージ
