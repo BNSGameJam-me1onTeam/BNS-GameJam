@@ -25,7 +25,7 @@ void Game::update()
     }
     if(miniGame)
     {
-        int32 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
+        int8 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
         if(result) {
             miniGame = false;
             Print << U"Player{} Win!!"_fmt(result);

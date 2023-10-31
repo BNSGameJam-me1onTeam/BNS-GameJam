@@ -27,7 +27,7 @@ void Title::update()
     }
     
     // P1コントローラ設定
-    Array<int32> inputdata = getWherePush();
+    Array<int8> inputdata = getWherePush();
     if(inputdata[0] != -1 and inputdata[1] != -1)
     {
         getData().p1_data.conindex = inputdata[0];

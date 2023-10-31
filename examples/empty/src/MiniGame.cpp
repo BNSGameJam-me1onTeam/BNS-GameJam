@@ -4,7 +4,7 @@
 int32 count = 10;
 double d_time = 0.0;
 
-int32 game_renda(InputGroup p1_in, InputGroup p2_in, Texture p1_img, Texture p2_img)
+int8 game_renda(InputGroup p1_in, InputGroup p2_in, Texture p1_img, Texture p2_img)
 {
     Rect{Arg::center(Scene::Center()), 1280, 720}.draw(ColorF{Palette::Black, 0.5});
     

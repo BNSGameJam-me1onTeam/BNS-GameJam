@@ -3,4 +3,4 @@
 
 extern int32 count;
 extern double d_time;
-int32 game_renda(InputGroup p1_in, InputGroup p2_in, Texture p1_img, Texture p2_img);
+int8 game_renda(InputGroup p1_in, InputGroup p2_in, Texture p1_img, Texture p2_img);

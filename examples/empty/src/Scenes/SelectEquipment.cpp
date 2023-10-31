@@ -18,8 +18,8 @@ SelectEquipment::~SelectEquipment()
 
 void SelectEquipment::update()
 {
-    int32 p1 = getData().p1_data.role;
-    int32 p2 = getData().p2_data.role;
+    int8 p1 = getData().p1_data.role;
+    int8 p2 = getData().p2_data.role;
 
     //Player1のカーソル処理
     if (getData().p1_input.Left.down() and (p1_cursor.x == 0 or p1_cursor.x == -1))
@@ -86,7 +86,7 @@ void SelectEquipment::update()
     }
     else{
         // P2コントローラ設定
-        Array<int32> inputdata = getWherePush();
+        Array<int8> inputdata = getWherePush();
         if(inputdata[0] != -1 and inputdata[1] != -1 and inputdata[0] != getData().p1_data.conindex)
         {
             getData().p2_data.conindex = inputdata[0];
@@ -110,8 +110,8 @@ void SelectEquipment::draw() const
         FontAsset(U"NormalFont")(U"任意のボタン(決定ボタン)を教えてください").drawAt(Scene::Center()+Point{0, 185}, ColorF{1.0, 1.0, 1.0});
     }
     
-    int32 p1 = getData().p1_data.role;
-    int32 p2 = getData().p2_data.role;
+    int8 p1 = getData().p1_data.role;
+    int8 p2 = getData().p2_data.role;
     
     // サムネ用の下地を出力
     for (auto i : step(3)){

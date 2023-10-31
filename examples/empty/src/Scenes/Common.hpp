@@ -15,9 +15,9 @@ enum class State
 // プレイヤーデータ role:役割, eqid:装備id, conindex:コントローラーindex
 struct PlayerData
 {
-    int32 role;
-    int32 eqid;
-    int32 conindex;
+    int8 role;
+    int8 eqid;
+    int8 conindex;
 };
 
 // キーコンフィグ
@@ -42,7 +42,7 @@ struct GameData
     InputData p1_input;
     InputData p2_input;
     // ステージid 0:鍋, 1:パフェ
-    int32 stage_id;
+    int8 stage_id;
 };
 
 using App = SceneManager<State, GameData>;
