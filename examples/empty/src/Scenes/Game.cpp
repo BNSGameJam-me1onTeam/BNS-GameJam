@@ -17,7 +17,7 @@ void Game::update()
 {
     if (MouseL.down())
     {
-        //changeScene(State::Result);
+        changeScene(State::Result);
     }
     if (KeyBackslash_US.down())
     {
