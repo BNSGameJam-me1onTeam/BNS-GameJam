@@ -18,32 +18,49 @@ SelectEquipment::~SelectEquipment()
 
 void SelectEquipment::update()
 {
-    // ゲームスタート
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
-    if (KeySpace.down() and p1 != -1 and p2 != -1 and p1 == !p2)
-    {
-        start.playOneShot();
-        changeScene(State::Game);
-    }
-    
+
     //Player1のカーソル処理
-    if (getData().p1_input.Up.down()){
-        p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
+    if (getData().p1_input.Left.down() and (p1_cursor.x == 0 or p1_cursor.x == -1))
+    {
+        p1_cursor.x = -1;
     }
-    if (getData().p1_input.Down.down()){
-        p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
+    else if(p1_cursor.x == -1 and getData().p1_input.Confirm.down())
+    {
+        changeScene(State::Title);
     }
-    if (getData().p1_input.Left.down()){
-        p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
+    else if (getData().p1_input.Right.down() and (p1_cursor.x == 2 or p1_cursor.x == 3) and p1 != -1 and p2 != -1 and p1 == !p2)
+    {
+        p1_cursor.x = 3;
     }
-    if (getData().p1_input.Right.down()){
-        p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
+    else if(p1_cursor.x == 3 and getData().p1_input.Confirm.down())
+    {
+        if (p1 != -1 and p2 != -1 and p1 == !p2)
+        {
+            start.playOneShot();
+            changeScene(State::Game);
+        }
     }
-    if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
-        getData().p1_data.role = p1_cursor.y;
-        getData().p1_data.eqid = p1_cursor.x;
-        select.playOneShot();
+    else
+    {
+        if (getData().p1_input.Up.down()){
+            p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
+        }
+        if (getData().p1_input.Down.down()){
+            p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
+        }
+        if (getData().p1_input.Left.down()){
+            p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
+        }
+        if (getData().p1_input.Right.down()){
+            p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
+        }
+        if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
+            getData().p1_data.role = p1_cursor.y;
+            getData().p1_data.eqid = p1_cursor.x;
+            select.playOneShot();
+        }
     }
     
     //Player2のカーソル処理
@@ -65,12 +82,6 @@ void SelectEquipment::update()
             getData().p2_data.role = p2_cursor.y;
             getData().p2_data.eqid = p2_cursor.x;
             select.playOneShot();
-        }
-        
-        // 点滅用
-        alpha += Scene::DeltaTime();
-        if (alpha >= 2.0){
-            alpha -= 2.0;
         }
     }
     else{
@@ -99,27 +110,47 @@ void SelectEquipment::draw() const
         FontAsset(U"NormalFont")(U"任意のボタン(決定ボタン)を教えてください").drawAt(Scene::Center()+Point{0, 185}, ColorF{1.0, 1.0, 1.0});
     }
     
-    // ゲームスタートの文字
     int32 p1 = getData().p1_data.role;
     int32 p2 = getData().p2_data.role;
-    if (p1 != -1 and p2 != -1 and p1 == !p2)
-    {
-        if (alpha > 1.0){
-            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, 1.0-(alpha-1.0)});
-        }else{
-            FontAsset(U"LargeFont")(U"Spaceを押してゲームスタート").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0, alpha});
-        }
-    }
     
     // サムネ用の下地を出力
     for (auto i : step(3)){
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.draw(ColorF{0.8, 0.8, 0.8});
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
     }
     
-    // カーソルの出力
-    Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Blue, 0.5});;
-    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.drawFrame(0, 10, ColorF{Palette::Red, 0.5});;
+    // タイトルに戻るボタン
+    Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
+    FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-500, -110});
+    
+    // ゲームを始めるボタン
+    if(p1 != -1 and p2 != -1 and p1 == !p2)
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
+        FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0});
+        FontAsset(U"LargeFont")(U"ゲームを始めよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
+    }
+    else
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8, 0.5});
+        FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0, 0.5});
+        FontAsset(U"LargeFont")(U"キャラクターを選択しよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
+    }
+    
+    // カーソル
+    if (p1_cursor.x == -1)
+    {
+        Rect{Arg::center(Scene::Center()+Point{-500, -110}), 210, 70}.rounded(1).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    else if (p1_cursor.x == 3)
+    {
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 210, 70}.rounded(1).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    else
+    {
+        Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.rounded(3).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+    }
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.rounded(3).drawFrame(0, 10, ColorF{Palette::Red, 0.5});
     
     // サムネ一覧の表示
     for (auto i : step(3)){
