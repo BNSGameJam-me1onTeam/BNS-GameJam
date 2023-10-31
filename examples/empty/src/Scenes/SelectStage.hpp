@@ -13,5 +13,6 @@ public:
 
 private:
     Texture textureStageOden;
-    Texture textureComingSoon;
+    Texture textureStageParfait;
+    Texture textureStageRandom;
 };

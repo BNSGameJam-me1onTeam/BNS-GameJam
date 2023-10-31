@@ -15,8 +15,10 @@ constexpr Point NORMAL_FONT_OFFSET = {430, 180};   // 通常フォントのオ�
 // コンストラクタ: ステージセレクトの開始時に呼び出される
 SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
-      textureStageOden(U"example/IMG_055111.png"),        // おでんステージのテクスチャ
-      textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
+      textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
+      textureStageParfait(U"example/StageParfait.png"),  // パフェステージのテクスチャ（）
+      textureStageRandom(U"example/StageRandom.png")     // ランダムステージのテクスチャ
+
 {
     Print << U"SelectStage::SelectStage()";    // デバッグメッセージ
 }
@@ -67,8 +69,8 @@ void SelectStage::draw() const
 
     // ステージの画像を描画
     textureStageOden.resized(TEXTURE_SIZE).draw(RECT_X + 50, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
+    textureStageParfait.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
+    textureStageRandom.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
     
     // タイトルと戻るテキストの描画
     FontAsset(U"TitleFont")(U"ステージを選んでね！（仮）").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
