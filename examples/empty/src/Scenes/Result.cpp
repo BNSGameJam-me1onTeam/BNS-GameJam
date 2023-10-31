@@ -24,6 +24,6 @@ void Result::draw() const
 {
     Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
     winnerAnimation.advance();
-    winnerAnimation.drawAt(Scene::Center());
+    winnerAnimation.scaled(0.5).drawAt(Scene::Center());
 }
 

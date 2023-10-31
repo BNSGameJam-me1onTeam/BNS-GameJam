@@ -16,7 +16,6 @@ private:
     Array<Texture> nige_soubi;
     Point p1_cursor{0, 0};
     Point p2_cursor{0, 0};
-    double alpha = 0.0;
     
     const Audio select{ U"example/sound/select_equipment.mp3" };
     const Audio start{ U"example/sound/togame.mp3" };
