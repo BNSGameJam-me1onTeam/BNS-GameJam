@@ -16,6 +16,9 @@ Result::Result(const InitData& init) : IScene{ init }
             textures << Texture{ image };
         }
         images.clear();
+        
+        bgm = Audio{U"example/sound/{}-win.mp3"_fmt(winner_id ? U"oden" : U"otama"), Loop::Yes};
+        bgm.play(1s);
     }
 }
 
@@ -35,6 +38,7 @@ void Result::update()
     
     if (getData().p1_input.Confirm.down() or getData().p2_input.Confirm.down())
     {
+        bgm.stop(1s);
         if(cursor){System::Exit();}
         else{changeScene(State::Title);}
     }

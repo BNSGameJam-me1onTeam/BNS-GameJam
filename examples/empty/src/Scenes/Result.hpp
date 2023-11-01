@@ -16,4 +16,5 @@ private:
     Array<Texture> textures;
     Array<int32> delays;
     int32 cursor = 0;
+    Audio bgm;
 };

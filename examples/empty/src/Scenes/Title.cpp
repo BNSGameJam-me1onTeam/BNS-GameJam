@@ -11,7 +11,7 @@ Title::Title(const InitData& init) : IScene{ init }
     getData().p2_input = {KeyLeft, KeyRight, KeyUp, KeyDown, KeySlash};
     getData().stage_id = 0;
     getData().winner = 0;
-    bgm.play();
+    bgm.play(1.0s);
 }
 
 Title::~Title()
@@ -24,6 +24,7 @@ void Title::update()
     if (KeyEnter.down())
     {
         getData().use_controller = false;
+        bgm.stop(1s);
         changeScene(State::SelectStage);
     }
     
@@ -38,6 +39,7 @@ void Title::update()
         getData().p1_input.Right = Gamepad(inputdata[0]).povRight;
         getData().p1_input.Confirm = Gamepad(inputdata[0]).buttons[inputdata[1]];
         getData().use_controller = true;
+        bgm.stop(1s);
         changeScene(State::SelectStage);
     }
 }
