@@ -17,15 +17,10 @@ SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
       textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
       textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
-{
-    Print << U"SelectStage::SelectStage()";    // デバッグメッセージ
-}
+{}
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
-SelectStage::~SelectStage()
-{
-    Print << U"SelectStage::~SelectStage()";   // デバッグメッセージ
-}
+SelectStage::~SelectStage(){}
 
 // アップデート処理: ステージセレクトの更新
 void SelectStage::update()

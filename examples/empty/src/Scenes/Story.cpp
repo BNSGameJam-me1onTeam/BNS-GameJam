@@ -1,15 +1,9 @@
 // Story.cpp
 #include "Story.hpp"
 
-Story::Story(const InitData& init) : IScene{ init }
-{
-    Print << U"Story::Story()";
-}
+Story::Story(const InitData& init) : IScene{ init }{}
 
-Story::~Story()
-{
-    Print << U"Story::~Story()";
-}
+Story::~Story(){}
 
 void Story::update()
 {

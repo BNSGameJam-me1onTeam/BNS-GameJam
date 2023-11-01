@@ -14,10 +14,7 @@ Title::Title(const InitData& init) : IScene{ init }
     bgm.play(1.0s);
 }
 
-Title::~Title()
-{
-    Print << U"UseController: " << getData().use_controller;
-}
+Title::~Title(){}
 
 void Title::update()
 {
