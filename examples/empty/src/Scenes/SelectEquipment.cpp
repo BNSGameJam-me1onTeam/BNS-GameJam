@@ -120,19 +120,19 @@ void SelectEquipment::draw() const
     }
     
     // タイトルに戻るボタン
-    Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
+    Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 70}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
     FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-500, -110});
     
     // ゲームを始めるボタン
     if(p1 != -1 and p2 != -1 and p1 == !p2)
     {
-        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 70}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
         FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0});
         FontAsset(U"LargeFont")(U"ゲームを始めよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
     }
     else
     {
-        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 90}.rounded(10).draw(ColorF{0.8, 0.8, 0.8, 0.5});
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 70}.rounded(10).draw(ColorF{0.8, 0.8, 0.8, 0.5});
         FontAsset(U"NormalFont")(U"ゲームを始める").drawAt(Scene::Center()+Point{500, -110}, ColorF{1.0, 1.0, 1.0, 0.5});
         FontAsset(U"LargeFont")(U"キャラクターを選択しよう！").drawAt(Scene::Center()+Point{0, 170}, ColorF{1.0, 1.0, 1.0});
     }
@@ -140,17 +140,17 @@ void SelectEquipment::draw() const
     // カーソル
     if (p1_cursor.x == -1)
     {
-        Rect{Arg::center(Scene::Center()+Point{-500, -110}), 210, 70}.rounded(1).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+        Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 70}.rounded(10).drawFrame(10, 0, ColorF{Palette::Blue, 0.5});
     }
     else if (p1_cursor.x == 3)
     {
-        Rect{Arg::center(Scene::Center()+Point{500, -110}), 210, 70}.rounded(1).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+        Rect{Arg::center(Scene::Center()+Point{500, -110}), 230, 70}.rounded(10).drawFrame(10, 0, ColorF{Palette::Blue, 0.5});
     }
     else
     {
-        Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 192}.rounded(3).drawFrame(0, 10, ColorF{Palette::Blue, 0.5});
+        Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 210}.rounded(10).drawFrame(10, 0, ColorF{Palette::Blue, 0.5});
     }
-    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 192}.rounded(3).drawFrame(0, 10, ColorF{Palette::Red, 0.5});
+    Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 210}.rounded(10).drawFrame(10, 0, ColorF{Palette::Red, 0.5});
     
     // サムネ一覧の表示
     for (auto i : step(3)){
