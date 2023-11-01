@@ -12,5 +12,7 @@ public:
     void draw() const override;
 
 private:
-    VideoTexture winnerAnimation;
+    AnimatedGIFReader winnerAnimation;
+    Array<Texture> textures;
+    Array<int32> delays;
 };
