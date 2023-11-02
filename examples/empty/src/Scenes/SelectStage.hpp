@@ -14,4 +14,5 @@ public:
 private:
     Texture textureStageOden;
     Texture textureComingSoon;
+    const Audio bgm{U"example/sound/selectstage.mp3", Loop::Yes};
 };

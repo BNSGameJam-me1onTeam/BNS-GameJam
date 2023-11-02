@@ -17,7 +17,10 @@ SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
       textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
       textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
-{}
+{
+    bgm.setVolume(0.5);
+    bgm.play(1s);
+}
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
 SelectStage::~SelectStage(){}
@@ -41,11 +44,13 @@ void SelectStage::update()
         // 戻るボタンが選択中の場合、タイトルシーンに戻る
         if (getData().stage_id == -1)
         {
+            bgm.stop(1s);
             changeScene(State::Title);
         }
         // おでんステージが選択中の場合、ストーリーシーンに移動
         else if (getData().stage_id == 0)
         {
+            bgm.stop(1s);
             changeScene(State::Story);
         }
     }
