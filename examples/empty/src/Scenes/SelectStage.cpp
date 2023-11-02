@@ -18,7 +18,7 @@ SelectStage::SelectStage(const InitData& init)
       textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
       textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
 {
-    bgm.setVolume(0.5);
+    bgm.setVolume(0.3);
     bgm.play(1s);
 }
 
@@ -32,11 +32,13 @@ void SelectStage::update()
     if (getData().p1_input.Left.down() && getData().stage_id != -1)
     {
         --getData().stage_id;
+        cursor.playOneShot();
     }
     // 右入力時、かつ現在選択中の項目が右端でなければ、項目枠を右に移動
     if (getData().p1_input.Right.down() && getData().stage_id != 2)
     {
         ++getData().stage_id;
+        cursor.playOneShot();
     }
     // 確認ボタンを押下時の処理
     if (getData().p1_input.Confirm.down())
@@ -45,12 +47,14 @@ void SelectStage::update()
         if (getData().stage_id == -1)
         {
             bgm.stop(1s);
+            confirm.playOneShot();
             changeScene(State::Title);
         }
         // おでんステージが選択中の場合、ストーリーシーンに移動
         else if (getData().stage_id == 0)
         {
             bgm.stop(1s);
+            confirm.playOneShot();
             changeScene(State::Story);
         }
     }
