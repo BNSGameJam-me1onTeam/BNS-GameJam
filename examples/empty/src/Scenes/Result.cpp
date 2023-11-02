@@ -53,8 +53,8 @@ void Result::draw() const
     
     // ボタン
     Rect{Arg::center(Scene::Center()+Point{-400, 300}), 210, 50}.rounded(1).drawFrame(0, 10, ColorF{cursor ? Palette::Gray : Palette::White});
-    FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-400, 300});
+    FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center()+Point{-400, 300}, ColorF{cursor ? Palette::Gray : Palette::White});
     Rect{Arg::center(Scene::Center()+Point{400, 300}), 210, 50}.rounded(1).drawFrame(0, 10, ColorF{cursor ? Palette::White : Palette::Gray});
-    FontAsset(U"NormalFont")(U"終了する").drawAt(Scene::Center()+Point{400, 300});
+    FontAsset(U"NormalFont")(U"終了する").drawAt(Scene::Center()+Point{400, 300}, ColorF{cursor ? Palette::White : Palette::Gray});
 }
 

@@ -10,11 +10,7 @@ SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
     }
 }
 
-SelectEquipment::~SelectEquipment()
-{
-    Print << U"Player1 Role: {}, EquipmentID: {}"_fmt(getData().p1_data.role, getData().p1_data.eqid);
-    Print << U"Player2 Role: {}, EquipmentID: {}"_fmt(getData().p2_data.role, getData().p2_data.eqid);
-}
+SelectEquipment::~SelectEquipment(){}
 
 void SelectEquipment::update()
 {
