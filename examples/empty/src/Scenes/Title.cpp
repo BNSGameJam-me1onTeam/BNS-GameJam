@@ -16,6 +16,7 @@ void Title::update()
     if (MouseL.down())
     {
         changeScene(State::SelectStage);
+//        changeScene(State::Game);
     }
 }
 
