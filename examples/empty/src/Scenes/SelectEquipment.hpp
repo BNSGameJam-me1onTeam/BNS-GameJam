@@ -19,5 +19,8 @@ private:
     
     const Audio select{ U"example/sound/select_equipment.mp3" };
     const Audio start{ U"example/sound/togame.mp3" };
+    const Audio cursor{U"example/sound/cursor.mp3"};
+    const Audio confirm{U"example/sound/confirm.mp3"};
     const Texture bg{U"example/background/SelectEquipment.png"};
+    
 };

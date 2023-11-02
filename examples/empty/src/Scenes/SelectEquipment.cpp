@@ -21,14 +21,17 @@ void SelectEquipment::update()
     if (getData().p1_input.Left.down() and (p1_cursor.x == 0 or p1_cursor.x == -1))
     {
         p1_cursor.x = -1;
+        cursor.playOneShot();
     }
     else if(p1_cursor.x == -1 and getData().p1_input.Confirm.down())
     {
+        confirm.playOneShot();
         changeScene(State::Title);
     }
     else if (getData().p1_input.Right.down() and (p1_cursor.x == 2 or p1_cursor.x == 3) and p1 != -1 and p2 != -1 and p1 == !p2)
     {
         p1_cursor.x = 3;
+        cursor.playOneShot();
     }
     else if(p1_cursor.x == 3 and getData().p1_input.Confirm.down())
     {
@@ -42,15 +45,19 @@ void SelectEquipment::update()
     {
         if (getData().p1_input.Up.down()){
             p1_cursor.y = Clamp(--(p1_cursor.y), 0, 1);
+            cursor.playOneShot();
         }
         if (getData().p1_input.Down.down()){
             p1_cursor.y = Clamp(++(p1_cursor.y), 0, 1);
+            cursor.playOneShot();
         }
         if (getData().p1_input.Left.down()){
             p1_cursor.x = Clamp(--(p1_cursor.x), 0, 2);
+            cursor.playOneShot();
         }
         if (getData().p1_input.Right.down()){
             p1_cursor.x = Clamp(++(p1_cursor.x), 0, 2);
+            cursor.playOneShot();
         }
         if (getData().p1_input.Confirm.down() and !(getData().p1_data.role == p1_cursor.y and getData().p1_data.eqid == p1_cursor.x)){
             getData().p1_data.role = p1_cursor.y;
@@ -64,15 +71,19 @@ void SelectEquipment::update()
     {
         if (getData().p2_input.Up.down()){
             p2_cursor.y = Clamp(--(p2_cursor.y), 0, 1);
+            cursor.playOneShot();
         }
         if (getData().p2_input.Down.down()){
             p2_cursor.y = Clamp(++(p2_cursor.y), 0, 1);
+            cursor.playOneShot();
         }
         if (getData().p2_input.Left.down()){
             p2_cursor.x = Clamp(--(p2_cursor.x), 0, 2);
+            cursor.playOneShot();
         }
         if (getData().p2_input.Right.down()){
             p2_cursor.x = Clamp(++(p2_cursor.x), 0, 2);
+            cursor.playOneShot();
         }
         if (getData().p2_input.Confirm.down() and !(getData().p2_data.role == p2_cursor.y and getData().p2_data.eqid == p2_cursor.x)){
             getData().p2_data.role = p2_cursor.y;
