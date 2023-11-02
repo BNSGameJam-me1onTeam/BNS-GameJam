@@ -12,5 +12,12 @@ public:
     void draw() const override;
 
 private:
-    Texture m_texture;
+    Array<Texture> seme_soubi;
+    Array<Texture> nige_soubi;
+    Point p1_cursor{0, 0};
+    Point p2_cursor{0, 0};
+    
+    const Audio select{ U"example/sound/select_equipment.mp3" };
+    const Audio start{ U"example/sound/togame.mp3" };
+    const Texture bg{U"example/background/SelectEquipment.png"};
 };

@@ -55,5 +55,10 @@ private:
     Vec2 m_position_otama;
     Vec2 m_position_nabeTop;
     Vec2 m_position_nabeUnder;
+
+    Texture m_texture;
+    bool miniGame = false;
+    Texture p1_img;
+    Texture p2_img;
 };
 

@@ -48,7 +48,8 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     }
     images.clear();
     
-    
+    p1_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1)};
+    p2_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1)};
     
     m_stopwatch.start();
     
@@ -128,6 +129,19 @@ void Game::update(){
             m_stopwatch.restart();
         }
     }
+    if (KeyBackslash_US.down())
+    {
+        miniGame = true;
+    }
+    if(miniGame)
+    {
+        int32 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
+        if(result) {
+            miniGame = false;
+            Print << U"Player{} Win!!"_fmt(result);
+        }
+        return;
+    }
 }
 
 void Game::draw() const{
@@ -171,6 +185,12 @@ void Game::draw() const{
     else if (m_state == GameState::Finished){
         FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
     }
+
+    if(miniGame)
+    {
+        return;
+    }
+    m_texture.drawAt(Cursor::Pos());
 }
 
 
