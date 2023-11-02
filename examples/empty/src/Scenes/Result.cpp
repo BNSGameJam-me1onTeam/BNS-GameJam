@@ -29,16 +29,19 @@ void Result::update()
     if (getData().p1_input.Left.down() or getData().p2_input.Left.down())
     {
         cursor -= 1;
+        cursor_s.playOneShot();
     }
     if (getData().p1_input.Right.down() or getData().p2_input.Right.down())
     {
         cursor += 1;
+        cursor_s.playOneShot();
     }
     cursor = Clamp(cursor, 0, 1);
     
     if (getData().p1_input.Confirm.down() or getData().p2_input.Confirm.down())
     {
         bgm.stop(1s);
+        confirm.playOneShot();
         if(cursor){System::Exit();}
         else{changeScene(State::Title);}
     }
