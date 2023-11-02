@@ -8,6 +8,8 @@ SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
         seme_soubi << Texture{U"example/texture/{}/seme_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
         nige_soubi << Texture{U"example/texture/{}/nige_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
     }
+    bgm.play(1s);
+    bgm.setVolume(0.5);
 }
 
 SelectEquipment::~SelectEquipment(){}
@@ -26,6 +28,7 @@ void SelectEquipment::update()
     else if(p1_cursor.x == -1 and getData().p1_input.Confirm.down())
     {
         confirm.playOneShot();
+        bgm.stop(1s);
         changeScene(State::Title);
     }
     else if (getData().p1_input.Right.down() and (p1_cursor.x == 2 or p1_cursor.x == 3) and p1 != -1 and p2 != -1 and p1 == !p2)
@@ -38,6 +41,7 @@ void SelectEquipment::update()
         if (p1 != -1 and p2 != -1 and p1 == !p2)
         {
             start.playOneShot();
+            bgm.stop(1s);
             changeScene(State::Game);
         }
     }

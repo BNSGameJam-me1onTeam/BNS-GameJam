@@ -17,6 +17,7 @@ private:
     Point p1_cursor{0, 0};
     Point p2_cursor{0, 0};
     
+    const Audio bgm{ U"example/sound/selecteq.mp3", Loop::Yes};
     const Audio select{ U"example/sound/select_equipment.mp3" };
     const Audio start{ U"example/sound/togame.mp3" };
     const Audio cursor{U"example/sound/cursor.mp3"};

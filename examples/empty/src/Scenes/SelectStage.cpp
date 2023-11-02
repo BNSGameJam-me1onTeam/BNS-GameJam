@@ -18,8 +18,8 @@ SelectStage::SelectStage(const InitData& init)
       textureStageOden(U"example/StageOden.png"),        // おでんステージのテクスチャ
       textureComingSoon(U"example/ComingSoon.png")       // 未実装ステージのテクスチャ
 {
-    bgm.setVolume(0.3);
     bgm.play(1s);
+    bgm.setVolume(0.5);
 }
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
