@@ -16,7 +16,9 @@ constexpr Point NORMAL_FONT_OFFSET = {430, 180};   // 通常フォントのオ�
 SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
       textureStageOden(U"bns-gamejam/images/StageOden.png"),        // おでんステージのテクスチャ
-      textureComingSoon(U"bns-gamejam/images/ComingSoon.png")       // 未実装ステージのテクスチャ
+      textureStageParfait(U"bns-gamejam/images/StageParfait.png"),       // ステージのテクスチャ
+      textureStageRandom(U"bns-gamejam/images/StageRandom.png")       // 未実装ステージのテクスチャ
+
 {
     bgm.play(1s);
     bgm.setVolume(0.5);
@@ -71,8 +73,8 @@ void SelectStage::draw() const
 
     // ステージの画像を描画
     textureStageOden.resized(TEXTURE_SIZE).draw(RECT_X + 50, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
+    textureStageParfait.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
+    textureStageRandom.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
     
     // タイトルと戻るテキストの描画
     FontAsset(U"TitleFont")(U"ステージを選んでね！（仮）").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});

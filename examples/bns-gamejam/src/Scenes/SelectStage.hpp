@@ -13,7 +13,8 @@ public:
 
 private:
     Texture textureStageOden;
-    Texture textureComingSoon;
+    Texture textureStageParfait;
+    Texture textureStageRandom;
     const Audio bgm{U"bns-gamejam/sounds/selectstage.mp3", Loop::Yes};
     const Audio cursor{U"bns-gamejam/sounds/cursor.mp3"};
     const Audio confirm{U"bns-gamejam/sounds/confirm.mp3"};
