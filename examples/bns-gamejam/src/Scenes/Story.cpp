@@ -7,7 +7,7 @@ Story::~Story(){}
 
 void Story::update()
 {
-    if (MouseL.down())
+    if (storyAnimation.posSec() >= storyAnimation.lengthSec())
     {
         changeScene(State::SelectEquipment);
     }
@@ -15,8 +15,7 @@ void Story::update()
 
 void Story::draw() const
 {
-    Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
-    FontAsset(U"TitleFont")(U"My Game").drawAt(400, 100);
-    Circle{ Cursor::Pos(), 50 }.draw(Palette::Orange);
+    storyAnimation.advance();
+    storyAnimation.scaled(0.68).drawAt(Scene::Center());
 }
 
