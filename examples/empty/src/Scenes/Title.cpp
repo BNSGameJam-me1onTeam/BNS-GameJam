@@ -38,7 +38,6 @@ void Title::update()
         getData().p1_input.Confirm = Gamepad(inputdata[0]).buttons[inputdata[1]];
         getData().use_controller = true;
         changeScene(State::SelectStage);
-//        changeScene(State::Game);
     }
 }
 
