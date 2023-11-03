@@ -77,7 +77,7 @@ void SelectStage::draw() const
     textureStageRandom.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
     
     // タイトルと戻るテキストの描画
-    FontAsset(U"TitleFont")(U"ステージを選んでね！（仮）").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
+    FontAsset(U"TitleFont")(U"ステージを選んでね！").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
     FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center() - NORMAL_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
 
     // 現在選択中の項目を可視化する枠表示
