@@ -1,9 +1,6 @@
-// Game.cpp
-# include <Siv3D.hpp>
+#include <Siv3D.hpp>
 #include "Game.hpp"
-#include <iostream>
-#include <string>
-using namespace std;
+#include "MiniGame.hpp"
 
 Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown }, m_countdownSeconds{ 3 }{
     // 各種値の設定
@@ -48,17 +45,13 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     }
     images.clear();
     
-    p1_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1)};
-    p2_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1)};
+//    p1_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1)};
+//    p2_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1)};
     
     m_stopwatch.start();
-    
-    Print << U"Game::Game()";
 }
 
-Game::~Game(){
-    Print << U"Game::~Game()";
-}
+Game::~Game(){}
 
 void Game::update(){
     if (m_state == GameState::Countdown){
@@ -129,19 +122,19 @@ void Game::update(){
             m_stopwatch.restart();
         }
     }
-    if (KeyBackslash_US.down())
-    {
-        miniGame = true;
-    }
-    if(miniGame)
-    {
-        int8 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
-        if(result) {
-            miniGame = false;
-            Print << U"Player{} Win!!"_fmt(result);
-        }
-        return;
-    }
+//    if (KeyBackslash_US.down())
+//    {
+//        miniGame = true;
+//    }
+//    if(miniGame)
+//    {
+//        int8 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
+//        if(result) {
+//            miniGame = false;
+//            Print << U"Player{} Win!!"_fmt(result);
+//        }
+//        return;
+//    }
 }
 
 void Game::draw() const{
@@ -186,11 +179,9 @@ void Game::draw() const{
         FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
     }
 
-    if(miniGame)
-    {
-        return;
-    }
-    m_texture.drawAt(Cursor::Pos());
+//    if(miniGame)
+//    {
+//        return;
+//    }
+//    m_texture.drawAt(Cursor::Pos());
 }
-
-
