@@ -18,10 +18,10 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     FontAsset::Register(U"StopwatchFont", 30, Typeface::Heavy);
     
     // 画像の読み込み
-    m_texture_background = Texture(U"images/IMG_0543.png");
-    m_texture_otama = Texture(U"images/IMG_0542.png");
-    m_texture_nabeTop = Texture(U"images/nabe_top.png");
-    m_texture_nabeUnder = Texture(U"images/TestOden.png");
+    m_texture_background = Texture(U"bns-gamejam/images/IMG_0543.png");
+    m_texture_otama = Texture(U"bns-gamejam/images/IMG_0542.png");
+    m_texture_nabeTop = Texture(U"bns-gamejam/images/nabe_top.png");
+    m_texture_nabeUnder = Texture(U"bns-gamejam/images/TestOden.png");
 
     // 画像の初期位置
     m_position_guzai = Vec2(400, Scene::Height()-250);
@@ -31,7 +31,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     
     // GIF アニメーション画像を開く
     // const AnimatedGIFReader gif{ U"images/IMG_0536.gif" };
-    const AnimatedGIFReader gif{ U"images/Moti.gif" };
+    const AnimatedGIFReader gif{ U"bns-gamejam/images/Moti.gif" };
 
     // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
     gif.read(images, delays);
