@@ -6,7 +6,7 @@ Result::Result(const InitData& init) : IScene{ init }
     if (getData().winner == 0 or getData().winner == 1)
     {
         int8 winner_id = getData().winner ^ getData().p1_data.role;
-        winnerAnimation = AnimatedGIFReader{U"example/background/{}-win.gif"_fmt(winner_id ? U"oden" : U"otama")};
+        winnerAnimation = AnimatedGIFReader{U"example/backgrounds/{}-win.gif"_fmt(winner_id ? U"oden" : U"otama")};
         
         Array<Image> images;
         winnerAnimation.read(images, delays);
@@ -17,7 +17,7 @@ Result::Result(const InitData& init) : IScene{ init }
         }
         images.clear();
         
-        bgm = Audio{U"example/sound/{}-win.mp3"_fmt(winner_id ? U"oden" : U"otama"), Loop::Yes};
+        bgm = Audio{U"example/sounds/{}-win.mp3"_fmt(winner_id ? U"oden" : U"otama"), Loop::Yes};
         bgm.play(1s);
     }
 }

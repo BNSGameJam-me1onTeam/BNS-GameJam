@@ -12,8 +12,8 @@ public:
     void draw() const override;
 
 private:
-    VideoTexture titleAnimation{U"example/video/title.mp4", Loop::Yes};
-    const Audio bgm{ U"example/sound/title.mp3", Loop::Yes};
-    const Audio confirm{U"example/sound/confirm.mp3"};
+    VideoTexture titleAnimation{U"example/backgrounds/title.mp4", Loop::Yes};
+    const Audio bgm{ U"example/sounds/title.mp3", Loop::Yes};
+    const Audio confirm{U"example/sounds/confirm.mp3"};
 };
 

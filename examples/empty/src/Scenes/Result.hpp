@@ -17,6 +17,6 @@ private:
     Array<int32> delays;
     int32 cursor = 0;
     Audio bgm;
-    const Audio cursor_s{U"example/sound/cursor.mp3"};
-    const Audio confirm{U"example/sound/confirm.mp3"};
+    const Audio cursor_s{U"example/sounds/cursor.mp3"};
+    const Audio confirm{U"example/sounds/confirm.mp3"};
 };

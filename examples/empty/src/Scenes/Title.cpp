@@ -40,7 +40,6 @@ void Title::update()
         confirm.playOneShot();
         bgm.stop(1s);
         changeScene(State::SelectStage);
-//        changeScene(State::Game);
     }
 }
 
