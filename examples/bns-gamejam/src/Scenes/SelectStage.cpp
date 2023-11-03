@@ -3,14 +3,14 @@
 
 // ステージセレクトの定数
 constexpr int RECT_X = 90;                 // 戻るボタンのX座標
-constexpr int RECT_Y = 150;                // 戻るボタンのY座標
+constexpr int RECT_Y = 170;                // 戻るボタンのY座標
 constexpr int RECT_WIDTH = 250;            // 戻るボタンの幅
 constexpr int RECT_HEIGHT = 60;            // 戻るボタンの高さ
 constexpr int TEXTURE_SIZE = 300;          // ステージ画像のサイズ
 constexpr int TEXTURE_GAP = 350;           // ステージ画像の間隔
 constexpr int TEXTURE_Y = 300;             // ステージ画像のY座標
 constexpr Point TITLE_FONT_OFFSET = {0, 260};      // タイトルフォントのオフセット
-constexpr Point NORMAL_FONT_OFFSET = {430, 180};   // 通常フォントのオフセット
+constexpr Point NORMAL_FONT_OFFSET = {430, 160};   // 通常フォントのオフセット
 
 // コンストラクタ: ステージセレクトの開始時に呼び出される
 SelectStage::SelectStage(const InitData& init)
