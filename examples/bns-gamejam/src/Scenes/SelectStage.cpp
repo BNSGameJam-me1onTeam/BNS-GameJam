@@ -66,7 +66,8 @@ void SelectStage::update()
 void SelectStage::draw() const
 {
     // 背景色の設定
-    Scene::SetBackground(ColorF(0.2, 0.2, 0.2));
+    Animation.advance();
+    Animation.drawAt(Scene::Center());
     
     // 戻るボタンの描画
     RoundRect{ RECT_X, RECT_Y, RECT_WIDTH, RECT_HEIGHT, 10}.draw(ColorF{ 0.6 });

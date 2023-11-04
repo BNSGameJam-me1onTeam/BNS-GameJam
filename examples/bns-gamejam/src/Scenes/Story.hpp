@@ -12,5 +12,5 @@ public:
     void draw() const override;
 
 private:
-    Texture m_texture;
+    VideoTexture storyAnimation{U"bns-gamejam/backgrounds/story.mp4", Loop::No};
 };
