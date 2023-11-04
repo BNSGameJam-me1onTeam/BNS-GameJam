@@ -38,7 +38,6 @@
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
 		C13DA9852AE89AF5000056FC /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C13DA9832AE89AF5000056FC /* Controller.cpp */; };
-		C196F47E2AECD3A5003C8584 /* MiniGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C196F47C2AECD3A5003C8584 /* MiniGame.cpp */; };
 		C1A54A5A2AE534BF004DEA82 /* SelectStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A522AE534BF004DEA82 /* SelectStage.cpp */; };
 		C1A54A5C2AE534BF004DEA82 /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A572AE534BF004DEA82 /* Story.cpp */; };
 		C1A54A5D2AE534BF004DEA82 /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A582AE534BF004DEA82 /* SelectEquipment.cpp */; };
@@ -82,8 +81,6 @@
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
 		C13DA9832AE89AF5000056FC /* Controller.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
 		C13DA9842AE89AF5000056FC /* Controller.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
-		C196F47C2AECD3A5003C8584 /* MiniGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MiniGame.cpp; sourceTree = "<group>"; };
-		C196F47D2AECD3A5003C8584 /* MiniGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MiniGame.hpp; sourceTree = "<group>"; };
 		C1A54A512AE5348C004DEA82 /* Common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 		C1A54A522AE534BF004DEA82 /* SelectStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectStage.cpp; sourceTree = "<group>"; };
 		C1A54A532AE534BF004DEA82 /* SelectEquipment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SelectEquipment.hpp; sourceTree = "<group>"; };
@@ -164,8 +161,6 @@
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
 				C13DA9832AE89AF5000056FC /* Controller.cpp */,
 				C13DA9842AE89AF5000056FC /* Controller.hpp */,
-				C196F47C2AECD3A5003C8584 /* MiniGame.cpp */,
-				C196F47D2AECD3A5003C8584 /* MiniGame.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -257,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "empty" */;
+			buildConfigurationList = 2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "bns-gamejam" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -299,7 +294,6 @@
 				DF2839A72AE518C100498A2F /* Game.cpp in Sources */,
 				DF2839A42AE518A200498A2F /* Title.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
-				C196F47E2AECD3A5003C8584 /* MiniGame.cpp in Sources */,
 				C1A54A5C2AE534BF004DEA82 /* Story.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,7 +538,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "empty" */ = {
+		2C17787D1CE0A9D800BB8AD0 /* Build configuration list for PBXProject "bns-gamejam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C17787E1CE0A9D800BB8AD0 /* Debug */,
