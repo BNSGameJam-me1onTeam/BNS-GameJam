@@ -22,6 +22,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     // ステージに関する設定
     // --------------------------------------------------------------------------------------------
     
+    miniGame_counter = 10;
+    miniGame_timeCounter = 0.0;
+    
     // フォントの設定
     FontAsset::Register(U"CountDownFont", 200, Typeface::Heavy);
     FontAsset::Register(U"StopwatchFont", 45, Typeface::Heavy);
@@ -37,6 +40,12 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     // 画像の位置
     m_position_nabeTop = Vec2(Scene::Width()/2, Scene::Height()-665);
     m_position_nabeUnder = Vec2(Scene::Width()/2, Scene::Height());
+
+    for (auto i : step(3))
+    {
+        p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
+        p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
+    }
     
     
     // --------------------------------------------------------------------------------------------
@@ -770,6 +779,46 @@ void Game::update(){
         }
     }
     else if (m_state == GameState::MiniGame){
+        
+        miniGame_timeCounter += Scene::DeltaTime();
+        if(miniGame_timeCounter > 3.0){
+            if(getData().p1_input.Confirm.down()){
+                miniGame_counter--;
+                if (p1_state % 2) {p1_state = 2;}
+                else {p1_state = 1;}
+            }
+            if(getData().p2_input.Confirm.down()){
+                miniGame_counter++;
+                if (p2_state % 2) {p2_state = 2;}
+                else {p2_state = 1;}
+            }
+            miniGame_counter = Clamp(miniGame_counter, 0, 20);
+        }else{
+            p1_state = 0;
+            p2_state = 0;
+        }
+        
+        if(miniGame_counter <= 0)
+        {
+            if (getData().p1_data.role){m_state = GameState::Playing;}
+            else {
+                m_state = GameState::Finished;
+                getData().winner = 0;
+            }
+            miniGame_counter = 10;
+            miniGame_timeCounter = 0.0;
+        }
+        if(miniGame_counter >= 20)
+        {
+            if (getData().p2_data.role){m_state = GameState::Playing;}
+            else {
+                m_state = GameState::Finished;
+                getData().winner = 1;
+            }
+            miniGame_counter = 10;
+            miniGame_timeCounter = 0.0;
+        }
+
         // タイマーを再開
         m_stopwatch.resume();
         if (m_stopwatch_skil.ms() != 0){
@@ -782,22 +831,10 @@ void Game::update(){
     else if (m_state == GameState::Finished){
         if (m_stopwatch.ms() >= 1000){
             changeScene(State::Result);
+            getData().winner = !(getData().p1_data.role);
             m_stopwatch.restart();
         }
     }
-    //    if (KeyBackslash_US.down())
-    //    {
-    //        miniGame = true;
-    //    }
-    //    if(miniGame)
-    //    {
-    //        int8 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
-    //        if(result) {
-    //            miniGame = false;
-    //            Print << U"Player{} Win!!"_fmt(result);
-    //        }
-    //        return;
-    //    }
 }
 
 void Game::draw() const{
@@ -895,16 +932,41 @@ void Game::draw() const{
     else if (m_state == GameState::Finished){
         FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
     }
-
-    //    if(miniGame)
-    //    {
-    //        return;
-    //    }
-    //    m_texture.drawAt(Cursor::Pos());
     
     // --------------------------------------------------------------------------------------------
     // デバック用の描画
     // --------------------------------------------------------------------------------------------
     
     // Circle(m_position_debug, 10).draw(Palette::Red);
+
+    
+    // ミニゲーム用draw
+    if(m_state == GameState::MiniGame)
+    {
+        Rect{Arg::center(Scene::Center()), 1280, 720}.draw(ColorF{Palette::Black, 0.5});
+        
+        if(miniGame_timeCounter < 1.0)
+        {
+            FontAsset(U"CountFont")(3).drawAt(Scene::Center(), ColorF{1.0, 1.0, 1.0});
+        }
+        else if(miniGame_timeCounter < 2.0)
+        {
+            p1_texture[0].resized(1024).mirrored().drawAt(Scene::Center()-Point(200, 100));
+            FontAsset(U"CountFont")(2).drawAt(Scene::Center()+Point(200, 0), ColorF{1.0, 1.0, 1.0});
+        }
+        else if(miniGame_timeCounter < 3.0)
+        {
+            p2_texture[0].resized(1024).drawAt(Scene::Center()+Point(200, -100));
+            FontAsset(U"CountFont")(1).drawAt(Scene::Center()-Point(200, 0), ColorF{1.0, 1.0, 1.0});
+        }
+        else
+        {
+            // バー
+            Rect::FromPoints(Scene::Center()-Point(500, 300), Scene::Center()-Point((miniGame_counter-10)*50, 250)).draw(ColorF{Palette::Blue});
+            Rect::FromPoints(Scene::Center()-Point((miniGame_counter-10)*50, 300), Scene::Center()-Point(-500, 250)).draw(ColorF{Palette::Red});
+            // キャラ画像
+            p1_texture[p1_state].resized(512).mirrored().drawAt(Scene::Center()+Point(-100, 100));
+            p2_texture[p2_state].resized(512).drawAt(Scene::Center()+Point(100, 100));
+        }
+    }
 }
