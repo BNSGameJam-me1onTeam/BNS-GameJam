@@ -79,7 +79,7 @@ void Game::update(){
     else if (m_state == GameState::Playing)
     {
         // デバック用
-        m_state = GameState::MiniGame;
+//        m_state = GameState::MiniGame;
         if (MouseL.down()){
             changeScene(State::Result);
         }
