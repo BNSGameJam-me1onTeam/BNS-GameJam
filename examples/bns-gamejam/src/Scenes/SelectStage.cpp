@@ -3,20 +3,22 @@
 
 // ステージセレクトの定数
 constexpr int RECT_X = 90;                 // 戻るボタンのX座標
-constexpr int RECT_Y = 150;                // 戻るボタンのY座標
+constexpr int RECT_Y = 170;                // 戻るボタンのY座標
 constexpr int RECT_WIDTH = 250;            // 戻るボタンの幅
 constexpr int RECT_HEIGHT = 60;            // 戻るボタンの高さ
 constexpr int TEXTURE_SIZE = 300;          // ステージ画像のサイズ
 constexpr int TEXTURE_GAP = 350;           // ステージ画像の間隔
 constexpr int TEXTURE_Y = 300;             // ステージ画像のY座標
 constexpr Point TITLE_FONT_OFFSET = {0, 260};      // タイトルフォントのオフセット
-constexpr Point NORMAL_FONT_OFFSET = {430, 180};   // 通常フォントのオフセット
+constexpr Point NORMAL_FONT_OFFSET = {430, 160};   // 通常フォントのオフセット
 
 // コンストラクタ: ステージセレクトの開始時に呼び出される
 SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
       textureStageOden(U"bns-gamejam/images/StageOden.png"),        // おでんステージのテクスチャ
-      textureComingSoon(U"bns-gamejam/images/ComingSoon.png")       // 未実装ステージのテクスチャ
+      textureStageParfait(U"bns-gamejam/images/StageParfait.png"),       // ステージのテクスチャ
+      textureStageRandom(U"bns-gamejam/images/StageRandom.png")       // 未実装ステージのテクスチャ
+
 {
     bgm.play(1s);
     bgm.setVolume(0.5);
@@ -72,11 +74,11 @@ void SelectStage::draw() const
 
     // ステージの画像を描画
     textureStageOden.resized(TEXTURE_SIZE).draw(RECT_X + 50, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
-    textureComingSoon.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
+    textureStageParfait.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP, TEXTURE_Y);
+    textureStageRandom.resized(TEXTURE_SIZE).draw(RECT_X + 50 + TEXTURE_GAP * 2, TEXTURE_Y);
     
     // タイトルと戻るテキストの描画
-    FontAsset(U"TitleFont")(U"ステージを選んでね！（仮）").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
+    FontAsset(U"TitleFont")(U"ステージを選んでね！").drawAt(Scene::Center() - TITLE_FONT_OFFSET, ColorF{0.2, 0.2, 0.2});
     FontAsset(U"NormalFont")(U"タイトルに戻る").drawAt(Scene::Center() - NORMAL_FONT_OFFSET, ColorF{1.0, 1.0, 1.0});
 
     // 現在選択中の項目を可視化する枠表示
