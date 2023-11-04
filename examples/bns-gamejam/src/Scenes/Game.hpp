@@ -1,6 +1,7 @@
 // Game.hpp
 #pragma once
 #include "Common.hpp"
+#include "Mob.hpp"
 
 class Game : public App::Scene
 {
@@ -40,6 +41,9 @@ private:
     
     int m_countdownSeconds;
     int max_timeCount;
+    
+    Mob* mob_1;
+    Mob* mob_2;
     
     
     // ----------------------------------------
@@ -148,5 +152,8 @@ private:
     // ----------------------------------------
     
     Vec2 m_position_debug;
+    
     int speed_debug = 200;
+    
+    bool debug_on = false;
 };

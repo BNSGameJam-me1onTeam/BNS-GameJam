@@ -1,5 +1,6 @@
 #include <Siv3D.hpp>
 #include "Game.hpp"
+#include "Mob.hpp"
 #include "MiniGame.hpp"
 
 Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown }, m_countdownSeconds{ 3 }{
@@ -30,7 +31,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     FontAsset::Register(U"StopwatchFont", 45, Typeface::Heavy);
     
     // 制限時間
-    max_timeCount = 5940;
+    max_timeCount = 10;
     
     // 画像の読み込み
     m_texture_background = Texture(U"bns-gamejam/images/nabe/background.png");
@@ -44,7 +45,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     for (auto i : step(3))
     {
         p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
-        p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
+        p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1, i+1)};
     }
     
     
@@ -87,6 +88,8 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         
         guzai_input = getData().p1_input;
         
+        getData().winner = 0;
+        
         switch (data.p1_data.eqid) {
             case 0:
                 guzai_id = 0;
@@ -118,6 +121,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-250);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 1);
+                mob_2 = new Mob(init, 2);
+                
                 break;
             case 1:
                 guzai_id = 1;
@@ -149,6 +157,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-250);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 0);
+                mob_2 = new Mob(init, 2);
+                
                 break;
             case 2:
                 guzai_id = 2;
@@ -180,6 +193,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-270);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 0);
+                mob_2 = new Mob(init, 1);
+                
                 break;
             default:
                 break;
@@ -297,6 +315,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         }
     }
     
+    
     // --------------------------------------------------------------------------------------------
     // プレイヤー2に関する設定
     // --------------------------------------------------------------------------------------------
@@ -336,6 +355,8 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         
         guzai_input = getData().p2_input;
         
+        getData().winner = 1;
+        
         switch (data.p2_data.eqid) {
             case 0:
                 guzai_id = 0;
@@ -367,6 +388,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-250);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 1);
+                mob_2 = new Mob(init, 2);
+                
                 break;
             case 1:
                 guzai_id = 1;
@@ -398,6 +424,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-250);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 0);
+                mob_2 = new Mob(init, 2);
+                
                 break;
             case 2:
                 guzai_id = 2;
@@ -429,6 +460,11 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // 画像の初期位置
                 m_position_guzai = Vec2(400, Scene::Height()-270);
+                
+                // 残りのモブを生成
+                mob_1 = new Mob(init, 0);
+                mob_2 = new Mob(init, 1);
+                
                 break;
             default:
                 break;
@@ -490,7 +526,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 scoop_speed = 450;
                 
                 // すくった判定をする際の高さ（これより大きくないといけない）
-                scoop_JudgeHeight = 570;
+                scoop_JudgeHeight = 490;
                 
                 // 当たり判定（これを現在の位置にプラスして判定する）
                 catchRangeX_right = -32;
@@ -518,17 +554,17 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 size_otama = 0.6;
                 
                 // 移動速度
-                speed_otama = 400;
+                speed_otama = 350;
                 
                 // すくう速さ
-                scoop_speed = 400;
+                scoop_speed = 350;
                 
                 // すくった判定をする際の高さ（これより大きくないといけない）
-                scoop_JudgeHeight = 490;
+                scoop_JudgeHeight = 650;
                 
                 // 当たり判定（これを現在の位置にプラスして判定する）
                 catchRangeX_right = 50;
-                catchRangeX_left = -159;
+                catchRangeX_left = -170;
                 catchRangeY_high = 119;
                 catchRangeY_low = 269;
                 
@@ -610,17 +646,13 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     // そのほかの設定
     // --------------------------------------------------------------------------------------------
     
-    // p1_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1)};
-    // p2_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1)};
-    
     m_stopwatch.start();
-    
-    Print << m_position_guzai.y;
-    
-    Print << getData().winner;
 }
 
-Game::~Game(){}
+Game::~Game(){
+    delete mob_1;
+    delete mob_2;
+}
 
 void Game::update(){
     if (m_state == GameState::Countdown){
@@ -645,42 +677,48 @@ void Game::update(){
         // デバック用
         // --------------------------------------------------------------------------------------------
         
-        //        if (MouseL.down()){
-        //            changeScene(State::Result);
-        //        }
+        if (debug_on){
+            if (MouseL.down()){
+                changeScene(State::Result);
+            }
+            
+            if (KeyK.pressed()){
+                m_position_debug.y += (Scene::DeltaTime() * speed_debug);
+                
+                Print << U"out";
+                Print << m_position_debug.x << U", " << m_position_debug.y;
+                Print << m_position_otama.x << U", " << m_position_otama.y;
+                Print << m_position_guzai.x << U", " << m_position_guzai.y;
+            }
+            
+            if (KeyI.pressed()){
+                m_position_debug.y -= (Scene::DeltaTime() * speed_debug);
+                
+                Print << U"out";
+                Print << m_position_debug.x << U", " << m_position_debug.y;
+                Print << m_position_otama.x << U", " << m_position_otama.y;
+                Print << m_position_guzai.x << U", " << m_position_guzai.y;
+            }
+            
+            if (KeyJ.pressed()){
+                m_position_debug.x -= (Scene::DeltaTime() * speed_debug);
+                
+                Print << U"out";
+                Print << m_position_debug.x << U", " << m_position_debug.y;
+                Print << m_position_otama.x << U", " << m_position_otama.y;
+                Print << m_position_guzai.x << U", " << m_position_guzai.y;
+            }
+            
+            if (KeyL.pressed()){
+                m_position_debug.x += (Scene::DeltaTime() * speed_debug);
+                
+                Print << U"out";
+                Print << m_position_debug.x << U", " << m_position_debug.y;
+                Print << m_position_otama.x << U", " << m_position_otama.y;
+                Print << m_position_guzai.x << U", " << m_position_guzai.y;
+            }
+        }
         
-        if (KeyK.pressed()){
-            m_position_debug.y += (Scene::DeltaTime() * speed_debug);
-            
-            Print << U"out";
-            Print << m_position_debug.x << U", " << m_position_debug.y;
-            Print << m_position_otama.x << U", " << m_position_otama.y;
-            Print << m_position_guzai.x << U", " << m_position_guzai.y;
-        }
-        if (KeyI.pressed()){
-            m_position_debug.y -= (Scene::DeltaTime() * speed_debug);
-            
-            Print << U"out";
-            Print << m_position_debug.x << U", " << m_position_debug.y;
-            Print << m_position_otama.x << U", " << m_position_otama.y;
-            Print << m_position_guzai.x << U", " << m_position_guzai.y;
-        }
-        if (KeyJ.pressed()){
-            m_position_debug.x -= (Scene::DeltaTime() * speed_debug);
-            
-            Print << U"out";
-            Print << m_position_debug.x << U", " << m_position_debug.y;
-            Print << m_position_otama.x << U", " << m_position_otama.y;
-            Print << m_position_guzai.x << U", " << m_position_guzai.y;
-        }
-        if (KeyL.pressed()){
-            m_position_debug.x += (Scene::DeltaTime() * speed_debug);
-            
-            Print << U"out";
-            Print << m_position_debug.x << U", " << m_position_debug.y;
-            Print << m_position_otama.x << U", " << m_position_otama.y;
-            Print << m_position_guzai.x << U", " << m_position_guzai.y;
-        }
         
         
         // --------------------------------------------------------------------------------------------
@@ -819,12 +857,11 @@ void Game::update(){
             for (int i = m_position_otama.x + catchRangeX_left; i <= m_position_otama.x + catchRangeX_right; i++){
                 for (int j = m_position_otama.y + catchRangeY_high; j <= m_position_otama.y + catchRangeY_low; j++){
                     // 当たり判定
-                    //Print << U"x,y = " << m_position_guzai.x + hitRangeX_left << U", " << m_position_guzai.y + hitRangeY_high;
-                    //Print << U"x,y = " << m_position_guzai.x + hitRangeX_right << U", " << m_position_guzai.y + hitRangeY_low;
-                    
                     if (m_position_guzai.x + hitRangeX_left <= i && m_position_guzai.x + hitRangeX_right >= i && m_position_guzai.y + hitRangeY_high <= j && m_position_guzai.y + hitRangeY_low >= j){
-                        Print << U"i,j = " << i << U", " << j;
-                        Print << U"height";
+                        if (debug_on){
+                            Print << U"i,j = " << i << U", " << j;
+                            Print << U"height";
+                        }
                         if (m_position_otama.y + catchRangeY_low > scoop_JudgeHeight){
                             judge = true;
                             break;
@@ -832,8 +869,6 @@ void Game::update(){
                     }
                 }
                 if (judge){
-                    Print << U"catch";
-                    
                     // タイマーを一時停止
                     m_stopwatch.pause();
                     if (m_stopwatch_skill.ms() != 0){
@@ -858,6 +893,14 @@ void Game::update(){
                 miniGameLoser_otama = false;
             }
         }
+        
+        
+        // --------------------------------------------------------------------------------------------
+        // モブの移動処理
+        // --------------------------------------------------------------------------------------------
+        
+        mob_1->update();
+        mob_2->update();
     }
     else if (m_state == GameState::MiniGame){
         
@@ -888,12 +931,12 @@ void Game::update(){
             }
             else {
                 m_state = GameState::Finished;
-                getData().winner = 0;
             }
+            getData().winner = 0;
             miniGame_counter = 10;
             miniGame_timeCounter = 0.0;
         }
-        if(miniGame_counter >= 20)
+        else if(miniGame_counter >= 20)
         {
             if (getData().p2_data.role)
             {
@@ -902,8 +945,8 @@ void Game::update(){
             }
             else {
                 m_state = GameState::Finished;
-                getData().winner = 1;
             }
+            getData().winner = 1;
             miniGame_counter = 10;
             miniGame_timeCounter = 0.0;
         }
@@ -918,11 +961,8 @@ void Game::update(){
         }
     }
     else if (m_state == GameState::Finished){
-        if (m_stopwatch.ms() >= 1000){
-            changeScene(State::Result);
-            getData().winner = !(getData().p1_data.role);
-            m_stopwatch.restart();
-        }
+        changeScene(State::Result);
+        m_stopwatch.reset();
     }
 }
 
@@ -939,6 +979,14 @@ void Game::draw() const{
     // --------------------------------------------------------------------------------------------
     
     m_texture_nabeTop.scaled(1.3).drawAt(m_position_nabeTop);
+    
+    
+    // --------------------------------------------------------------------------------------------
+    // モブの描画
+    // --------------------------------------------------------------------------------------------
+    
+    mob_1 -> draw();
+    mob_2 -> draw();
     
     
     // --------------------------------------------------------------------------------------------
@@ -1072,8 +1120,10 @@ void Game::draw() const{
     // デバック用の描画
     // --------------------------------------------------------------------------------------------
     
-    // Circle(m_position_debug, 10).draw(Palette::Red);
-    
-    // Rect(m_position_otama.x + catchRangeX_left, m_position_otama.y + catchRangeY_high, catchRangeX_right-catchRangeX_left, catchRangeY_low-catchRangeY_high).rounded(10).draw(ColorF{0, 0, 0});
-    // Rect(m_position_guzai.x + hitRangeX_left, m_position_guzai.y + hitRangeY_high, hitRangeX_right-hitRangeX_left, hitRangeY_low-hitRangeY_high).rounded(10).draw(ColorF{0, 0, 0});
+    if (debug_on){
+        Circle(m_position_debug, 10).draw(Palette::Red);
+        
+        Rect(m_position_otama.x + catchRangeX_left, m_position_otama.y + catchRangeY_high, catchRangeX_right-catchRangeX_left, catchRangeY_low-catchRangeY_high).rounded(10).draw(ColorF{0, 0, 0});
+        Rect(m_position_guzai.x + hitRangeX_left, m_position_guzai.y + hitRangeY_high, hitRangeX_right-hitRangeX_left, hitRangeY_low-hitRangeY_high).rounded(10).draw(ColorF{0, 0, 0});
+    }
 }
