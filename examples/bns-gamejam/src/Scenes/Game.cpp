@@ -30,6 +30,10 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
         p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
     }
+    for (auto i : step(4))
+    {
+        punch << Audio{U"bns-gamejam/sounds/punch_{}.mp3"_fmt(i+1)};
+    }
 
     // 画像の初期位置
     m_position_guzai = Vec2(400, Scene::Height()-250);
@@ -126,11 +130,13 @@ void Game::update(){
         if(miniGame_timeCounter > 3.0){
             if(getData().p1_input.Confirm.down()){
                 miniGame_counter--;
+                punch[Random(3)].playOneShot();
                 if (p1_state % 2) {p1_state = 2;}
                 else {p1_state = 1;}
             }
             if(getData().p2_input.Confirm.down()){
                 miniGame_counter++;
+                punch[Random(3)].playOneShot();
                 if (p2_state % 2) {p2_state = 2;}
                 else {p2_state = 1;}
             }
