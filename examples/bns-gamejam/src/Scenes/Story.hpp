@@ -13,4 +13,5 @@ public:
 
 private:
     VideoTexture storyAnimation{U"bns-gamejam/backgrounds/story.mp4", Loop::No};
+    const Audio bgm{U"bns-gamejam/sounds/story.mp3", Loop::Yes};
 };

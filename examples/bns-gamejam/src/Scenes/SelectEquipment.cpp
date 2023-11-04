@@ -9,7 +9,6 @@ SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
         nige_soubi << Texture{U"bns-gamejam/images/{}/nige_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
     }
     bgm.play(1s);
-    bgm.setVolume(0.5);
 }
 
 SelectEquipment::~SelectEquipment(){}

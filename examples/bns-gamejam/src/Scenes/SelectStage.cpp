@@ -21,7 +21,6 @@ SelectStage::SelectStage(const InitData& init)
 
 {
     bgm.play(1s);
-    bgm.setVolume(0.5);
 }
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
