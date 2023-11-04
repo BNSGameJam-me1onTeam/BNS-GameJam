@@ -114,8 +114,6 @@ void SelectEquipment::draw() const
     Animation.advance();
     Animation.drawAt(Scene::Center());
     
-    bg.resized(1280).drawAt(Scene::Center());
-    
     // 2Pのコントローラー設定の催促
     if (getData().use_controller and getData().p2_data.conindex == -1)
     {
@@ -126,11 +124,6 @@ void SelectEquipment::draw() const
     int8 p1 = getData().p1_data.role;
     int8 p2 = getData().p2_data.role;
     
-    // サムネ用の下地を出力
-    for (auto i : step(3)){
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
-        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
-    }
     
     // タイトルに戻るボタン
     Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 70}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
@@ -164,12 +157,6 @@ void SelectEquipment::draw() const
         Rect{Arg::center(Scene::Center()+Point{(p1_cursor.x-1)*220, (p1_cursor.y-1)*220}), 210}.rounded(10).drawFrame(10, 0, ColorF{Palette::Blue, 0.5});
     }
     Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 210}.rounded(10).drawFrame(10, 0, ColorF{Palette::Red, 0.5});
-    
-    // サムネ一覧の表示
-    for (auto i : step(3)){
-        seme_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, -220));
-        nige_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, 0));
-    }
     
     // 選択中の装備表示
     if(getData().p1_data.role == 0){

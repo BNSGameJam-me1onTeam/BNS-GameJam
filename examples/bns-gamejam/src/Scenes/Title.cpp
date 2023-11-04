@@ -46,6 +46,9 @@ void Title::update()
 void Title::draw() const
 {
     Scene::SetBackground(ColorF{ 0.3, 0.4, 0.5 });
+    ClearPrint();
+    Print << Profiler::FPS();
+    
     
     titleAnimation.advance();
     titleAnimation.drawAt(Scene::Center());
