@@ -112,6 +112,9 @@ void SelectEquipment::update()
 
 void SelectEquipment::draw() const
 {
+    Animation.advance();
+    Animation.drawAt(Scene::Center());
+    
     bg.resized(1280).drawAt(Scene::Center());
     
     // 2Pのコントローラー設定の催促

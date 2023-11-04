@@ -23,5 +23,6 @@ private:
     const Audio cursor{U"bns-gamejam/sounds/cursor.mp3"};
     const Audio confirm{U"bns-gamejam/sounds/confirm.mp3"};
     const Texture bg{U"bns-gamejam/backgrounds/SelectEquipment.png"};
+    const VideoTexture Animation{U"bns-gamejam/backgrounds/selectstage.mp4", Loop::Yes};
     
 };
