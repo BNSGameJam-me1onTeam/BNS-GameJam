@@ -19,7 +19,6 @@ SelectStage::SelectStage(const InitData& init)
       textureComingSoon(U"bns-gamejam/images/ComingSoon.png")       // 未実装ステージのテクスチャ
 {
     bgm.play(1s);
-    bgm.setVolume(0.5);
 }
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
