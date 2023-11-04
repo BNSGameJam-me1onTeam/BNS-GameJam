@@ -4,7 +4,7 @@
 
 Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown }, m_countdownSeconds{ 3 }{
     // 各種値の設定
-    max_timeCount = 900;
+    max_timeCount = 60;
     
     top_height_otama = 50;
     
@@ -12,6 +12,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     Xborder_right_guzai = 1050;
     Xborder_left_otama = 240;
     Xborder_right_otama = 1050;
+    
+    miniGame_counter = 10;
+    miniGame_timeCounter = 0.0;
     
     // フォントの設定
     FontAsset::Register(U"CountDownFont", 160, Typeface::Heavy);
@@ -22,6 +25,12 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     m_texture_otama = Texture(U"bns-gamejam/images/IMG_0542.png");
     m_texture_nabeTop = Texture(U"bns-gamejam/images/nabe_top.png");
     m_texture_nabeUnder = Texture(U"bns-gamejam/images/TestOden.png");
+    
+    for (auto i : step(3))
+    {
+        p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
+        p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
+    }
 
     // 画像の初期位置
     m_position_guzai = Vec2(400, Scene::Height()-250);
@@ -44,9 +53,6 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         guzai_textures << Texture{ image };
     }
     images.clear();
-    
-//    p1_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1)};
-//    p2_img = Texture{U"example/texture/{}/{}_soubi_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1)};
     
     m_stopwatch.start();
 }
@@ -72,6 +78,8 @@ void Game::update(){
     }
     else if (m_state == GameState::Playing)
     {
+        // デバック用
+        m_state = GameState::MiniGame;
         if (MouseL.down()){
             changeScene(State::Result);
         }
@@ -112,29 +120,52 @@ void Game::update(){
         }
     }
     else if (m_state == GameState::MiniGame){
-//        m_position_otama.y -= 5;
-//        m_position_guzai.y -= 5;
+        miniGame_timeCounter += Scene::DeltaTime();
+        if(miniGame_timeCounter > 3.0){
+            if(getData().p1_input.Confirm.down()){
+                miniGame_counter--;
+                if (p1_state % 2) {p1_state = 2;}
+                else {p1_state = 1;}
+            }
+            if(getData().p2_input.Confirm.down()){
+                miniGame_counter++;
+                if (p2_state % 2) {p2_state = 2;}
+                else {p2_state = 1;}
+            }
+            miniGame_counter = Clamp(miniGame_counter, 0, 20);
+        }else{
+            p1_state = 0;
+            p2_state = 0;
+        }
         
+        if(miniGame_counter <= 0)
+        {
+            if (getData().p1_data.role){m_state = GameState::Playing;}
+            else {
+                m_state = GameState::Finished;
+                getData().winner = 0;
+            }
+            miniGame_counter = 10;
+            miniGame_timeCounter = 0.0;
+        }
+        if(miniGame_counter >= 20)
+        {
+            if (getData().p2_data.role){m_state = GameState::Playing;}
+            else {
+                m_state = GameState::Finished;
+                getData().winner = 1;
+            }
+            miniGame_counter = 10;
+            miniGame_timeCounter = 0.0;
+        }
     }
     else if (m_state == GameState::Finished){
         if (m_stopwatch.ms() >= 1000){
             changeScene(State::Result);
+            getData().winner = !(getData().p1_data.role);
             m_stopwatch.restart();
         }
     }
-//    if (KeyBackslash_US.down())
-//    {
-//        miniGame = true;
-//    }
-//    if(miniGame)
-//    {
-//        int8 result = game_renda(getData().p1_input.Confirm, getData().p2_input.Confirm, p1_img, p2_img);
-//        if(result) {
-//            miniGame = false;
-//            Print << U"Player{} Win!!"_fmt(result);
-//        }
-//        return;
-//    }
 }
 
 void Game::draw() const{
@@ -145,24 +176,25 @@ void Game::draw() const{
     // 鍋上半分
     m_texture_nabeTop.scaled(1.3).drawAt(m_position_nabeTop);
     
-    // おたま
-    m_texture_otama.scaled(0.5).drawAt(m_position_otama);
-    
-    // 具材
-    // アニメーションの経過時間
-    const double t = Scene::Time();
-
-    // 経過時間と各フレームのディレイに基づいて、何番目のフレームを描けばよいかを計算
-    const size_t frameIndex = AnimatedGIFReader::GetFrameIndex(t, delays);
-    
-    if (guzai_direction == 0){
-        guzai_textures[frameIndex].scaled(0.25).drawAt(m_position_guzai);
-    }
-    else{
-        guzai_textures[frameIndex].mirrored().scaled(0.25).drawAt(m_position_guzai);
+    if(m_state != GameState::MiniGame){
+        // おたま
+        m_texture_otama.scaled(0.5).drawAt(m_position_otama);
         
+        // 具材
+        // アニメーションの経過時間
+        const double t = Scene::Time();
+        
+        // 経過時間と各フレームのディレイに基づいて、何番目のフレームを描けばよいかを計算
+        const size_t frameIndex = AnimatedGIFReader::GetFrameIndex(t, delays);
+        
+        if (guzai_direction == 0){
+            guzai_textures[frameIndex].scaled(0.25).drawAt(m_position_guzai);
+        }
+        else{
+            guzai_textures[frameIndex].mirrored().scaled(0.25).drawAt(m_position_guzai);
+            
+        }
     }
-    
     // 鍋下半分
     m_texture_nabeUnder.scaled(1.3).drawAt(m_position_nabeUnder);
     
@@ -178,10 +210,33 @@ void Game::draw() const{
     else if (m_state == GameState::Finished){
         FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
     }
-
-//    if(miniGame)
-//    {
-//        return;
-//    }
-//    m_texture.drawAt(Cursor::Pos());
+    // ミニゲーム用draw
+    if(m_state == GameState::MiniGame)
+    {
+        Rect{Arg::center(Scene::Center()), 1280, 720}.draw(ColorF{Palette::Black, 0.5});
+        
+        if(miniGame_timeCounter < 1.0)
+        {
+            FontAsset(U"CountFont")(3).drawAt(Scene::Center(), ColorF{1.0, 1.0, 1.0});
+        }
+        else if(miniGame_timeCounter < 2.0)
+        {
+            p1_texture[0].resized(1024).mirrored().drawAt(Scene::Center()-Point(200, 100));
+            FontAsset(U"CountFont")(2).drawAt(Scene::Center()+Point(200, 0), ColorF{1.0, 1.0, 1.0});
+        }
+        else if(miniGame_timeCounter < 3.0)
+        {
+            p2_texture[0].resized(1024).drawAt(Scene::Center()+Point(200, -100));
+            FontAsset(U"CountFont")(1).drawAt(Scene::Center()-Point(200, 0), ColorF{1.0, 1.0, 1.0});
+        }
+        else
+        {
+            // バー
+            Rect::FromPoints(Scene::Center()-Point(500, 300), Scene::Center()-Point((miniGame_counter-10)*50, 250)).draw(ColorF{Palette::Blue});
+            Rect::FromPoints(Scene::Center()-Point((miniGame_counter-10)*50, 300), Scene::Center()-Point(-500, 250)).draw(ColorF{Palette::Red});
+            // キャラ画像
+            p1_texture[p1_state].resized(512).mirrored().drawAt(Scene::Center()+Point(-100, 100));
+            p2_texture[p2_state].resized(512).drawAt(Scene::Center()+Point(100, 100));
+        }
+    }
 }
