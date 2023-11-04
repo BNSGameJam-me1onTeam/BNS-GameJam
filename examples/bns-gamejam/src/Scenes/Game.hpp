@@ -26,6 +26,8 @@ private:
     Texture m_texture_otama;
     Texture m_texture_nabeTop;
     Texture m_texture_nabeUnder;
+    Array<Texture> p1_texture;
+    Array<Texture> p2_texture;
     
     Array<Image> images;
     Array<int32> delays;
@@ -51,13 +53,17 @@ private:
     int Xborder_left_otama;
     int Xborder_right_otama;
     
+    int32 miniGame_counter;
+    int32 p1_state;
+    int32 p2_state;
+    double miniGame_timeCounter; 
+    
     Vec2 m_position_guzai;
     Vec2 m_position_otama;
     Vec2 m_position_nabeTop;
     Vec2 m_position_nabeUnder;
 
     Texture m_texture;
-    bool miniGame = false;
     Texture p1_img;
     Texture p2_img;
 };
