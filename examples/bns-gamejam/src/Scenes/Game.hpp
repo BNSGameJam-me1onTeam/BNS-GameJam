@@ -52,7 +52,7 @@ private:
     
     InputData guzai_input;
     
-    Stopwatch m_stopwatch_skil;
+    Stopwatch m_stopwatch_skill;
     
     Stopwatch m_stopwatch_interval;
     
@@ -72,13 +72,13 @@ private:
     
     int speed_guzai;
     
-    int skil_timer;
+    int skill_timer;
     
-    int skil_interval;
+    int skill_interval;
     
-    bool skilActive = false;
+    bool skillActive = false;
     
-    bool skilEnable = true;
+    bool skillEnable = true;
     
     
     // ----------------------------------------
@@ -131,16 +131,17 @@ private:
     // ミニゲーム関係
     // ----------------------------------------
     
+    Array<Image> images_miniGame;
+    Array<int32> delays_miniGame;
+    Array<Texture> miniGame_textures;
+    
     int32 miniGame_counter;
     int32 p1_state;
     int32 p2_state;
-    double miniGame_timeCounter; 
     
-    Vec2 m_position_guzai;
-    Vec2 m_position_otama;
-    Vec2 m_position_nabeTop;
-    Vec2 m_position_nabeUnder;
-
+    double miniGame_timeCounter;
+    
+    bool miniGameLoser_otama = false;
     
     // ----------------------------------------
     // デバック関係
