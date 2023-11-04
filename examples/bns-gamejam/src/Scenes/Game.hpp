@@ -66,5 +66,8 @@ private:
     Texture m_texture;
     Texture p1_img;
     Texture p2_img;
+    
+    const Audio main_bgm{ U"bns-gamejam/sounds/game.mp3", Loop::Yes};
+    const Audio mini_bgm{ U"bns-gamejam/sounds/minigame.mp3", Loop::Yes};
 };
 

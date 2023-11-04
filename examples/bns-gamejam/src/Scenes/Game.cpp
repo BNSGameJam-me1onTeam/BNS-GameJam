@@ -1,6 +1,5 @@
 #include <Siv3D.hpp>
 #include "Game.hpp"
-#include "MiniGame.hpp"
 
 Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown }, m_countdownSeconds{ 3 }{
     // 各種値の設定
@@ -74,6 +73,7 @@ void Game::update(){
         if (m_stopwatch.ms() >= 1000){
             m_state = GameState::Playing;
             m_stopwatch.restart();
+            main_bgm.play(1s);
         }
     }
     else if (m_state == GameState::Playing)
@@ -117,6 +117,8 @@ void Game::update(){
         if (m_position_otama.x - m_position_guzai.x >= 55 && m_position_otama.x - m_position_guzai.x <= 65 &&
             m_position_otama.y - m_position_guzai.y >= -100 && m_position_otama.y - m_position_guzai.y <= -90){
             m_state = GameState::MiniGame;
+            main_bgm.stop(1s);
+            mini_bgm.play(1s);
         }
     }
     else if (m_state == GameState::MiniGame){
@@ -140,7 +142,11 @@ void Game::update(){
         
         if(miniGame_counter <= 0)
         {
-            if (getData().p1_data.role){m_state = GameState::Playing;}
+            if (getData().p1_data.role){
+                m_state = GameState::Playing;
+                mini_bgm.stop(1s);
+                main_bgm.play(1s);
+            }
             else {
                 m_state = GameState::Finished;
                 getData().winner = 0;
@@ -150,7 +156,11 @@ void Game::update(){
         }
         if(miniGame_counter >= 20)
         {
-            if (getData().p2_data.role){m_state = GameState::Playing;}
+            if (getData().p2_data.role){
+                m_state = GameState::Playing;
+                mini_bgm.stop(1s);
+                main_bgm.play(1s);
+            }
             else {
                 m_state = GameState::Finished;
                 getData().winner = 1;
@@ -164,6 +174,8 @@ void Game::update(){
             changeScene(State::Result);
             getData().winner = !(getData().p1_data.role);
             m_stopwatch.restart();
+            main_bgm.stop(1s);
+            mini_bgm.stop(1s);
         }
     }
 }
