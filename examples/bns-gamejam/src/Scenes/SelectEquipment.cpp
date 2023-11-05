@@ -5,8 +5,8 @@
 SelectEquipment::SelectEquipment(const InitData& init) : IScene{ init }
 {
     for (auto i : step(3)){
-        seme_soubi << Texture{U"bns-gamejam/images/{}/seme_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
-        nige_soubi << Texture{U"bns-gamejam/images/{}/nige_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1)};
+        seme_soubi << Texture{ Resource(U"bns-gamejam/images/{}/seme_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1))};
+        nige_soubi << Texture{ Resource(U"bns-gamejam/images/{}/nige_{}.png"_fmt(!(getData().stage_id) ? U"nabe" : U"pafe", i+1))};
     }
     bgm.play(1s);
 }

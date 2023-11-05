@@ -12,8 +12,8 @@ public:
     void draw() const override;
 
 private:
-    const VideoTexture titleAnimation{U"bns-gamejam/backgrounds/title.mp4", Loop::Yes};
-    const Audio bgm{ U"bns-gamejam/sounds/title.mp3", Loop::Yes};
-    const Audio confirm{U"bns-gamejam/sounds/confirm.mp3"};
+    const VideoTexture titleAnimation{ Resource(U"bns-gamejam/backgrounds/title.mp4"), Loop::Yes};
+    const Audio bgm{ Resource(U"bns-gamejam/sounds/title.mp3"), Loop::Yes};
+    const Audio confirm{ Resource(U"bns-gamejam/sounds/confirm.mp3")};
 };
 

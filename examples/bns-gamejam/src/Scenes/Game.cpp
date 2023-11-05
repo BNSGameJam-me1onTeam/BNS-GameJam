@@ -33,18 +33,18 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     max_timeCount = 90;
     
     // 画像の読み込み
-    m_texture_background = Texture(U"bns-gamejam/images/nabe/background.png");
-    m_texture_nabeTop = Texture(U"bns-gamejam/images/nabe/nabe_top.png");
-    m_texture_nabeUnder = Texture(U"bns-gamejam/images/nabe/nabe_under.png");
+    m_texture_background = Texture( Resource(U"bns-gamejam/images/nabe/background.png"));
+    m_texture_nabeTop = Texture( Resource(U"bns-gamejam/images/nabe/nabe_top.png"));
+    m_texture_nabeUnder = Texture( Resource(U"bns-gamejam/images/nabe/nabe_under.png"));
 
     for (auto i : step(3))
     {
-        p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
-        p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1, i+1)};
+        p1_texture << Texture{ Resource(U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1))};
+        p2_texture << Texture{ Resource(U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1, i+1))};
     }
     for (auto i : step(4))
     {
-        punch << Audio{U"bns-gamejam/sounds/punch_{}.mp3"_fmt(i+1)};
+        punch << Audio{ Resource(U"bns-gamejam/sounds/punch_{}.mp3"_fmt(i+1))};
     }
 
     // 画像の初期位置
@@ -78,7 +78,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     gifPath_p1 += U".gif";
 
     // 生成したパスを元にGIFオブジェクトを作成
-    AnimatedGIFReader gif_p1{gifPath_p1};
+    AnimatedGIFReader gif_p1{ Resource(gifPath_p1)};
 
     // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
     gif_p1.read(images_p1, delays_p1);
@@ -354,7 +354,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     gifPath_p2 += U".gif";
 
     // 生成したパスを元にGIFオブジェクトを作成
-    AnimatedGIFReader gif_p2{gifPath_p2};
+    AnimatedGIFReader gif_p2{ Resource(gifPath_p2)};
 
     // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
     gif_p2.read(images_p2, delays_p2);
@@ -631,7 +631,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         gifPath_miniGame += U".gif";
 
         // 生成したパスを元にGIFオブジェクトを作成
-        AnimatedGIFReader gif_miniGame{gifPath_miniGame};
+        AnimatedGIFReader gif_miniGame{ Resource(gifPath_miniGame)};
 
         // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
         gif_miniGame.read(images_miniGame, delays_miniGame);
@@ -651,7 +651,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         gifPath_miniGame += U".gif";
 
         // 生成したパスを元にGIFオブジェクトを作成
-        AnimatedGIFReader gif_miniGame{gifPath_miniGame};
+        AnimatedGIFReader gif_miniGame{ Resource(gifPath_miniGame)};
 
         // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
         gif_miniGame.read(images_miniGame, delays_miniGame);
