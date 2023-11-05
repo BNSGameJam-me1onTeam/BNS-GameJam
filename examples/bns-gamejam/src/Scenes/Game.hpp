@@ -153,15 +153,27 @@ private:
     Texture p1_img;
     Texture p2_img;
     
-    const Audio main_bgm{ U"bns-gamejam/sounds/game.mp3", Loop::Yes};
-    const Audio mini_bgm{ U"bns-gamejam/sounds/minigame.mp3", Loop::Yes};
-    
     // パンチ音
     Array<Audio> punch;
     
     double miniGame_timeCounter;
     
     bool miniGameLoser_otama = false;
+    
+    
+    // ----------------------------------------
+    // サウンド関係
+    // ----------------------------------------
+    
+    const Audio main_bgm{ U"bns-gamejam/sounds/game.mp3", Loop::Yes};
+    const Audio mini_bgm{ U"bns-gamejam/sounds/minigame.mp3", Loop::Yes};
+    const Audio countdown_se{ U"bns-gamejam/sounds/countdown.mp3"};
+    const Array<Audio> skill_se = {
+        Audio{U"bns-gamejam/sounds/skill_1.mp3"},
+        Audio{U"bns-gamejam/sounds/skill_2.mp3"},
+        Audio{U"bns-gamejam/sounds/skill_3.mp3"}
+    };
+    bool countdown_flag = true;
     
     // ----------------------------------------
     // デバック関係
