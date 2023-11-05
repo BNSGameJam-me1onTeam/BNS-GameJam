@@ -674,6 +674,8 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     // --------------------------------------------------------------------------------------------
     
     m_stopwatch.start();
+    
+    countdown_se.playOneShot();
 }
 
 Game::~Game(){
