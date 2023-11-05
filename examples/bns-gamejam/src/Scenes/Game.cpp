@@ -797,7 +797,6 @@ void Game::update(){
                 switch (guzai_id) {
                     case 0:
                         speed_guzai /= 4;
-                        
                         m_stopwatch_skill.reset();
                         m_stopwatch_interval.reset();
                         m_stopwatch_interval.start();
@@ -828,6 +827,7 @@ void Game::update(){
             }
             if (guzai_input.Confirm.down() && skillEnable == true && skillActive == false){
                 skillActive = true;
+                skill_se[guzai_id].playOneShot();
                 switch (guzai_id) {
                     case 0:
                         speed_guzai *= 4;
