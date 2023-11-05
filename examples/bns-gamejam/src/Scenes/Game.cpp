@@ -30,16 +30,12 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     FontAsset::Register(U"StopwatchFont", 45, Typeface::Heavy);
     
     // 制限時間
-    max_timeCount = 6000;
+    max_timeCount = 90;
     
     // 画像の読み込み
     m_texture_background = Texture(U"bns-gamejam/images/nabe/background.png");
     m_texture_nabeTop = Texture(U"bns-gamejam/images/nabe/nabe_top.png");
     m_texture_nabeUnder = Texture(U"bns-gamejam/images/nabe/nabe_under.png");
-    
-    // 画像の位置
-    m_position_nabeTop = Vec2(Scene::Width()/2, Scene::Height()-665);
-    m_position_nabeUnder = Vec2(Scene::Width()/2, Scene::Height());
 
     for (auto i : step(3))
     {
@@ -54,7 +50,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     // 画像の初期位置
     m_position_guzai = Vec2(400, Scene::Height()-250);
     m_position_otama = Vec2(900, top_height_otama);
-    m_position_nabeTop = Vec2(Scene::Width()/2, Scene::Height()-650);
+    m_position_nabeTop = Vec2(Scene::Width()/2, Scene::Height()-664);
     m_position_nabeUnder = Vec2(Scene::Width()/2, Scene::Height());
     
     
@@ -914,17 +910,17 @@ void Game::update(){
                 if (judge){
                     // タイマーを一時停止
                     m_stopwatch.pause();
-                    if (m_stopwatch_skill.ms() != 0){
+                    if (m_stopwatch_skill.isRunning()){
                         m_stopwatch_skill.pause();
                     }
-                    if (m_stopwatch_interval.ms() != 0){
+                    if (m_stopwatch_interval.isRunning()){
                         m_stopwatch_interval.pause();
                     }
                     
                     // GameStateをミニゲームに移行
-                     m_state = GameState::MiniGame;
-                     main_bgm.stop(1s);
-                     mini_bgm.play(1s);
+                    m_state = GameState::MiniGame;
+                    main_bgm.stop(1s);
+                    mini_bgm.play(1s);
                     
                     break;
                 }
@@ -984,6 +980,12 @@ void Game::update(){
             getData().winner = 0;
             miniGame_counter = 10;
             miniGame_timeCounter = 0.0;
+            
+            // タイマーを再開
+            m_stopwatch.resume();
+            m_stopwatch_skill.resume();
+            m_stopwatch_interval.resume();
+
         }
         else if(miniGame_counter >= 20)
         {
@@ -1000,16 +1002,14 @@ void Game::update(){
             getData().winner = 1;
             miniGame_counter = 10;
             miniGame_timeCounter = 0.0;
-        }
-
-        // タイマーを再開
-        m_stopwatch.resume();
-        if (m_stopwatch_skill.ms() != 0){
+            
+            // タイマーを再開
+            m_stopwatch.resume();
             m_stopwatch_skill.resume();
-        }
-        if (m_stopwatch_interval.ms() != 0){
             m_stopwatch_interval.resume();
         }
+
+        
     }
     else if (m_state == GameState::Finished){
         changeScene(State::Result);

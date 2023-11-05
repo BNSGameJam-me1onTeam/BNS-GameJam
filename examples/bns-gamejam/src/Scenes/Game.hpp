@@ -173,7 +173,6 @@ private:
         Audio{U"bns-gamejam/sounds/skill_2.mp3"},
         Audio{U"bns-gamejam/sounds/skill_3.mp3"}
     };
-    bool countdown_flag = true;
     
     // ----------------------------------------
     // デバック関係
