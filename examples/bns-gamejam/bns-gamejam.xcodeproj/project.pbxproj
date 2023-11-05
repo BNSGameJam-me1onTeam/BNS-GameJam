@@ -42,6 +42,7 @@
 		C1A54A5C2AE534BF004DEA82 /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A572AE534BF004DEA82 /* Story.cpp */; };
 		C1A54A5D2AE534BF004DEA82 /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A582AE534BF004DEA82 /* SelectEquipment.cpp */; };
 		C1A54A5E2AE53519004DEA82 /* Result.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A562AE534BF004DEA82 /* Result.cpp */; };
+		C7F3AB1A2AF6DC95003A622D /* Mob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7F3AB182AF6DC95003A622D /* Mob.cpp */; };
 		DF2839A42AE518A200498A2F /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A22AE518A200498A2F /* Title.cpp */; };
 		DF2839A72AE518C100498A2F /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A52AE518C100498A2F /* Game.cpp */; };
 /* End PBXBuildFile section */
@@ -90,6 +91,8 @@
 		C1A54A572AE534BF004DEA82 /* Story.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Story.cpp; sourceTree = "<group>"; };
 		C1A54A582AE534BF004DEA82 /* SelectEquipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectEquipment.cpp; sourceTree = "<group>"; };
 		C1A54A592AE534BF004DEA82 /* Story.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Story.hpp; sourceTree = "<group>"; };
+		C7F3AB182AF6DC95003A622D /* Mob.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mob.cpp; sourceTree = "<group>"; };
+		C7F3AB192AF6DC95003A622D /* Mob.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mob.hpp; sourceTree = "<group>"; };
 		DF2839A22AE518A200498A2F /* Title.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
 		DF2839A32AE518A200498A2F /* Title.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
 		DF2839A52AE518C100498A2F /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				DF2839A62AE518C100498A2F /* Game.hpp */,
 				C1A54A562AE534BF004DEA82 /* Result.cpp */,
 				C1A54A552AE534BF004DEA82 /* Result.hpp */,
+				C7F3AB182AF6DC95003A622D /* Mob.cpp */,
+				C7F3AB192AF6DC95003A622D /* Mob.hpp */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			files = (
 				C1A54A5A2AE534BF004DEA82 /* SelectStage.cpp in Sources */,
 				C1A54A5D2AE534BF004DEA82 /* SelectEquipment.cpp in Sources */,
+				C7F3AB1A2AF6DC95003A622D /* Mob.cpp in Sources */,
 				C1A54A5E2AE53519004DEA82 /* Result.cpp in Sources */,
 				C13DA9852AE89AF5000056FC /* Controller.cpp in Sources */,
 				DF2839A72AE518C100498A2F /* Game.cpp in Sources */,
