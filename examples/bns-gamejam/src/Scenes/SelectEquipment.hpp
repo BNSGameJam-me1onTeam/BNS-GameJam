@@ -23,6 +23,11 @@ private:
     const Audio cursor{U"bns-gamejam/sounds/cursor.mp3"};
     const Audio confirm{U"bns-gamejam/sounds/confirm.mp3"};
     const Texture bg{U"bns-gamejam/backgrounds/SelectEquipment.png"};
-    const VideoTexture Animation{U"bns-gamejam/backgrounds/selecteq.mp4", Loop::Yes};
     
+    const AnimatedGIFReader animation{U"bns-gamejam/backgrounds/selectstage.gif"};
+    Array<Texture> textures;
+    Array<int32> delays;
+    const Texture loading{U"bns-gamejam/backgrounds/loading.png"};
+    
+    double flag = 2.0;
 };

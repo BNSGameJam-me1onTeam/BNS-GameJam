@@ -15,6 +15,22 @@ SelectEquipment::~SelectEquipment(){}
 
 void SelectEquipment::update()
 {
+    if (flag == 2.0)
+    {
+        Array<Image> images;
+        animation.read(images, delays);
+        for (const auto& image : images)
+        {
+            textures << Texture{ image };
+        }
+        ClearPrint();
+        flag = 1.0;
+    }
+    if(flag > 0)
+    {
+        flag -= Scene::DeltaTime();
+    }
+    
     int8 p1 = getData().p1_data.role;
     int8 p2 = getData().p2_data.role;
 
@@ -111,8 +127,19 @@ void SelectEquipment::update()
 
 void SelectEquipment::draw() const
 {
-    Animation.advance();
-    Animation.drawAt(Scene::Center());
+    if(flag == 2.0){
+        loading.drawAt(Scene::Center());
+        return;
+    }
+    
+    // アニメーションの経過時間
+    const double t = Scene::Time()/2;
+
+    // 経過時間と各フレームのディレイに基づいて、何番目のフレームを描けばよいかを計算
+    const size_t frameIndex = AnimatedGIFReader::GetFrameIndex(t, delays);
+
+    textures[frameIndex].drawAt(Scene::Center());
+    bg.drawAt(Scene::Center());
     
     // 2Pのコントローラー設定の催促
     if (getData().use_controller and getData().p2_data.conindex == -1)
@@ -124,6 +151,11 @@ void SelectEquipment::draw() const
     int8 p1 = getData().p1_data.role;
     int8 p2 = getData().p2_data.role;
     
+    // サムネ用の下地を出力
+    for (auto i : step(3)){
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, -220}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
+        Rect{Arg::center(Scene::Center()+Point{(i-1)*220, 0}), 210}.rounded(10).draw(ColorF{1.0, 1.0, 1.0});
+    }
     
     // タイトルに戻るボタン
     Rect{Arg::center(Scene::Center()+Point{-500, -110}), 230, 70}.rounded(10).draw(ColorF{0.8, 0.8, 0.8});
@@ -158,6 +190,12 @@ void SelectEquipment::draw() const
     }
     Rect{Arg::center(Scene::Center()+Point{(p2_cursor.x-1)*220, (p2_cursor.y-1)*220}), 210}.rounded(10).drawFrame(10, 0, ColorF{Palette::Red, 0.5});
     
+    // サムネ一覧の表示
+    for (auto i : step(3)){
+        seme_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, -220));
+        nige_soubi[i].resized(192).drawAt(Scene::Center()+Point((i-1)*220, 0));
+    }
+    
     // 選択中の装備表示
     if(getData().p1_data.role == 0){
         seme_soubi[getData().p1_data.eqid].resized(256).drawAt(Scene::Center()+Point(-500, 220));
@@ -170,5 +208,8 @@ void SelectEquipment::draw() const
         nige_soubi[getData().p2_data.eqid].resized(256).drawAt(Scene::Center()+Point(500, 220));
     }
     
+    if(flag > 0){
+        loading.drawAt(Scene::Center(), ColorF{1.0, 1.0, 1.0, flag});
+    }
 }
 
