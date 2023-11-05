@@ -1,7 +1,6 @@
 #include <Siv3D.hpp>
 #include "Game.hpp"
 #include "Mob.hpp"
-#include "MiniGame.hpp"
 
 Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown }, m_countdownSeconds{ 3 }{
     
@@ -47,6 +46,16 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
         p1_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p1_data.role ? U"nige" : U"seme", getData().p1_data.eqid+1, i+1)};
         p2_texture << Texture{U"bns-gamejam/images/nabe/{}_{}_{}.png"_fmt(getData().p2_data.role ? U"nige" : U"seme", getData().p2_data.eqid+1, i+1)};
     }
+    for (auto i : step(4))
+    {
+        punch << Audio{U"bns-gamejam/sounds/punch_{}.mp3"_fmt(i+1)};
+    }
+
+    // 画像の初期位置
+    m_position_guzai = Vec2(400, Scene::Height()-250);
+    m_position_otama = Vec2(900, top_height_otama);
+    m_position_nabeTop = Vec2(Scene::Width()/2, Scene::Height()-650);
+    m_position_nabeUnder = Vec2(Scene::Width()/2, Scene::Height());
     
     
     // --------------------------------------------------------------------------------------------
@@ -687,6 +696,7 @@ void Game::update(){
         if (m_stopwatch.ms() >= 1000){
             m_state = GameState::Playing;
             m_stopwatch.restart();
+            main_bgm.play(1s);
         }
     }
     else if (m_state == GameState::Playing)
@@ -877,6 +887,7 @@ void Game::update(){
             }
         }
         
+
         
         // --------------------------------------------------------------------------------------------
         // ミニゲームに移行するか判定
@@ -910,6 +921,8 @@ void Game::update(){
                     
                     // GameStateをミニゲームに移行
                      m_state = GameState::MiniGame;
+                     main_bgm.stop(1s);
+                     mini_bgm.play(1s);
                     
                     break;
                 }
@@ -938,11 +951,13 @@ void Game::update(){
         if(miniGame_timeCounter > 3.0){
             if(getData().p1_input.Confirm.down()){
                 miniGame_counter--;
+                punch[Random(3)].playOneShot();
                 if (p1_state % 2) {p1_state = 2;}
                 else {p1_state = 1;}
             }
             if(getData().p2_input.Confirm.down()){
                 miniGame_counter++;
+                punch[Random(3)].playOneShot();
                 if (p2_state % 2) {p2_state = 2;}
                 else {p2_state = 1;}
             }
@@ -958,6 +973,8 @@ void Game::update(){
             {
                 m_state = GameState::Playing;
                 miniGameLoser_otama = true;
+                mini_bgm.stop(1s);
+                main_bgm.play(1s);
             }
             else {
                 m_state = GameState::Finished;
@@ -972,6 +989,8 @@ void Game::update(){
             {
                 m_state = GameState::Playing;
                 miniGameLoser_otama = true;
+                mini_bgm.stop(1s);
+                main_bgm.play(1s);
             }
             else {
                 m_state = GameState::Finished;
@@ -993,6 +1012,8 @@ void Game::update(){
     else if (m_state == GameState::Finished){
         changeScene(State::Result);
         m_stopwatch.reset();
+        main_bgm.stop(1s);
+        mini_bgm.stop(1s);
     }
 }
 

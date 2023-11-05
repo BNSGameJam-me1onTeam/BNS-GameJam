@@ -29,6 +29,10 @@ void Main()
     
     // テスト用
 //    manager.init(State::SelectEquipment);
+    
+    int FPS = 60; // 1秒間に1画面を書き換える回数
+    Stopwatch sw;   //FPS60
+    sw.start(); //FPS60
 
     while (System::Update())
     {
@@ -36,6 +40,8 @@ void Main()
         {
             break;
         }
+        while (sw.msF() < 1000.0 / FPS);    //1/60秒経過するまでループ
+        sw.restart();
     }
 }
 

@@ -149,6 +149,21 @@ private:
     int32 p1_state;
     int32 p2_state;
     
+    Vec2 m_position_guzai;
+    Vec2 m_position_otama;
+    Vec2 m_position_nabeTop;
+    Vec2 m_position_nabeUnder;
+
+    Texture m_texture;
+    Texture p1_img;
+    Texture p2_img;
+    
+    const Audio main_bgm{ U"bns-gamejam/sounds/game.mp3", Loop::Yes};
+    const Audio mini_bgm{ U"bns-gamejam/sounds/minigame.mp3", Loop::Yes};
+    
+    // パンチ音
+    Array<Audio> punch;
+    
     double miniGame_timeCounter;
     
     bool miniGameLoser_otama = false;

@@ -21,7 +21,6 @@ SelectStage::SelectStage(const InitData& init)
 
 {
     bgm.play(1s);
-    bgm.setVolume(0.5);
 }
 
 // デストラクタ: ステージセレクトの終了時に呼び出される
@@ -30,6 +29,22 @@ SelectStage::~SelectStage(){}
 // アップデート処理: ステージセレクトの更新
 void SelectStage::update()
 {
+    if (flag == 2.0)
+    {
+        Array<Image> images;
+        bg.read(images, delays);
+        for (const auto& image : images)
+        {
+            textures << Texture{ image };
+        }
+        ClearPrint();
+        flag = 1.0;
+    }
+    if(flag > 0)
+    {
+        flag -= Scene::DeltaTime();
+    }
+    
     // 左入力時、かつ現在選択中の項目が左端でなければ、項目枠を左に移動
     if (getData().p1_input.Left.down() && getData().stage_id != -1)
     {
@@ -65,9 +80,18 @@ void SelectStage::update()
 // 描画処理: ステージセレクトの表示内容を描画
 void SelectStage::draw() const
 {
+    if(flag == 2.0){
+        loading.drawAt(Scene::Center());
+        return;
+    }
     // 背景色の設定
-    Animation.advance();
-    Animation.drawAt(Scene::Center());
+    // アニメーションの経過時間
+    const double t = Scene::Time()/2;
+
+    // 経過時間と各フレームのディレイに基づいて、何番目のフレームを描けばよいかを計算
+    const size_t frameIndex = AnimatedGIFReader::GetFrameIndex(t, delays);
+
+    textures[frameIndex].drawAt(Scene::Center());
     
     // 戻るボタンの描画
     RoundRect{ RECT_X, RECT_Y, RECT_WIDTH, RECT_HEIGHT, 10}.draw(ColorF{ 0.6 });
@@ -90,6 +114,10 @@ void SelectStage::draw() const
     {
         int xOffset = TEXTURE_GAP * (getData().stage_id - 1);
         RoundRect{Arg::center(Scene::Center() + Point{xOffset, 90}), Size(TEXTURE_SIZE, TEXTURE_SIZE), 10}.drawFrame(0, 5, Palette::Orange);
+    }
+    
+    if(flag > 0){
+        loading.drawAt(Scene::Center(), ColorF{1.0, 1.0, 1.0, flag});
     }
 }
 
