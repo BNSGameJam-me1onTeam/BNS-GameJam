@@ -17,17 +17,17 @@ private:
     Point p1_cursor{0, 0};
     Point p2_cursor{0, 0};
     
-    const Audio bgm{ U"bns-gamejam/sounds/selecteq.mp3", Loop::Yes};
-    const Audio select{ U"bns-gamejam/sounds/select_equipment.mp3" };
-    const Audio start{ U"bns-gamejam/sounds/togame.mp3" };
-    const Audio cursor{U"bns-gamejam/sounds/cursor.mp3"};
-    const Audio confirm{U"bns-gamejam/sounds/confirm.mp3"};
-    const Texture bg{U"bns-gamejam/backgrounds/SelectEquipment.png"};
+    const Audio bgm{ Resource(U"bns-gamejam/sounds/selecteq.mp3"), Loop::Yes};
+    const Audio select{ Resource(U"bns-gamejam/sounds/select_equipment.mp3")};
+    const Audio start{ Resource(U"bns-gamejam/sounds/togame.mp3")};
+    const Audio cursor{ Resource(U"bns-gamejam/sounds/cursor.mp3")};
+    const Audio confirm{ Resource(U"bns-gamejam/sounds/confirm.mp3")};
+    const Texture bg{ Resource(U"bns-gamejam/backgrounds/SelectEquipment.png")};
     
-    const AnimatedGIFReader animation{U"bns-gamejam/backgrounds/selectstage.gif"};
+    const AnimatedGIFReader animation{ Resource(U"bns-gamejam/backgrounds/selectstage.gif")};
     Array<Texture> textures;
     Array<int32> delays;
-    const Texture loading{U"bns-gamejam/backgrounds/loading.png"};
+    const Texture loading{ Resource(U"bns-gamejam/backgrounds/loading.png")};
     
     double flag = 2.0;
 };

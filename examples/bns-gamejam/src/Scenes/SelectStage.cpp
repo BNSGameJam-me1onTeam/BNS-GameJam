@@ -15,9 +15,9 @@ constexpr Point NORMAL_FONT_OFFSET = {430, 160};   // 通常フォントのオ�
 // コンストラクタ: ステージセレクトの開始時に呼び出される
 SelectStage::SelectStage(const InitData& init)
     : IScene{ init },
-      textureStageOden(U"bns-gamejam/images/StageOden.png"),        // おでんステージのテクスチャ
-      textureStageParfait(U"bns-gamejam/images/StageParfait.png"),       // ステージのテクスチャ
-      textureStageRandom(U"bns-gamejam/images/StageRandom.png")       // 未実装ステージのテクスチャ
+      textureStageOden( Resource(U"bns-gamejam/images/StageOden.png")),        // おでんステージのテクスチャ
+      textureStageParfait( Resource(U"bns-gamejam/images/StageParfait.png")),       // ステージのテクスチャ
+      textureStageRandom( Resource(U"bns-gamejam/images/StageRandom.png"))       // 未実装ステージのテクスチャ
 
 {
     bgm.play(1s);

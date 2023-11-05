@@ -25,7 +25,7 @@ Mob::Mob(const InitData& init, int guzai_id) : IScene{ init }{
     gifPath_mob += U".gif";
     
     // 生成したパスを元にGIFオブジェクトを作成
-    AnimatedGIFReader gif_mob{gifPath_mob};
+    AnimatedGIFReader gif_mob{ Resource(gifPath_mob)};
 
     // 各フレームの画像と、次のフレームへのディレイ（ミリ秒）をロード
     gif_mob.read(images_mob, delays_mob);

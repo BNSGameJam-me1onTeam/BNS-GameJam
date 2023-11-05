@@ -42,6 +42,7 @@
 		C1A54A5C2AE534BF004DEA82 /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A572AE534BF004DEA82 /* Story.cpp */; };
 		C1A54A5D2AE534BF004DEA82 /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A582AE534BF004DEA82 /* SelectEquipment.cpp */; };
 		C1A54A5E2AE53519004DEA82 /* Result.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1A54A562AE534BF004DEA82 /* Result.cpp */; };
+		C77509F42AF7546B00D67915 /* bns-gamejam in Resources */ = {isa = PBXBuildFile; fileRef = C77509F32AF7546B00D67915 /* bns-gamejam */; };
 		C7F3AB1A2AF6DC95003A622D /* Mob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7F3AB182AF6DC95003A622D /* Mob.cpp */; };
 		DF2839A42AE518A200498A2F /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A22AE518A200498A2F /* Title.cpp */; };
 		DF2839A72AE518C100498A2F /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DF2839A52AE518C100498A2F /* Game.cpp */; };
@@ -91,6 +92,7 @@
 		C1A54A572AE534BF004DEA82 /* Story.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Story.cpp; sourceTree = "<group>"; };
 		C1A54A582AE534BF004DEA82 /* SelectEquipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectEquipment.cpp; sourceTree = "<group>"; };
 		C1A54A592AE534BF004DEA82 /* Story.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Story.hpp; sourceTree = "<group>"; };
+		C77509F32AF7546B00D67915 /* bns-gamejam */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bns-gamejam"; path = "App/bns-gamejam"; sourceTree = "<group>"; };
 		C7F3AB182AF6DC95003A622D /* Mob.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mob.cpp; sourceTree = "<group>"; };
 		C7F3AB192AF6DC95003A622D /* Mob.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mob.hpp; sourceTree = "<group>"; };
 		DF2839A22AE518A200498A2F /* Title.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		2C1778791CE0A9D800BB8AD0 = {
 			isa = PBXGroup;
 			children = (
+				C77509F32AF7546B00D67915 /* bns-gamejam */,
 				2C6906D72298140F00A427D0 /* engine */,
 				2C1778921CE0A9EA00BB8AD0 /* Info.plist */,
 				2C1778A21CE0B65500BB8AD0 /* icon.icns */,
@@ -282,6 +285,7 @@
 			files = (
 				2C6906D82298140F00A427D0 /* engine in Resources */,
 				2C1778A31CE0B65500BB8AD0 /* icon.icns in Resources */,
+				C77509F42AF7546B00D67915 /* bns-gamejam in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
