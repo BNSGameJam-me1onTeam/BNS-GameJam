@@ -80,6 +80,12 @@ private:
     
     int skill_interval;
     
+    int skill_interval_prev = 0;
+    
+    double skill_interval_len = 0;
+    
+    int skill_gauge_height;
+    
     bool skillActive = false;
     
     bool skillEnable = true;

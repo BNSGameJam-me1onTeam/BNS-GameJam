@@ -31,7 +31,7 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
     FontAsset::Register(U"StopwatchFont", 45, Typeface::Heavy);
     
     // 制限時間
-    max_timeCount = 10;
+    max_timeCount = 6000;
     
     // 画像の読み込み
     m_texture_background = Texture(U"bns-gamejam/images/nabe/background.png");
@@ -106,6 +106,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 // スキルのインターバル（ms）
                 skill_interval = 10000;
                 
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
+                
                 // 移動速度
                 speed_guzai = 360;
                 
@@ -142,6 +145,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 // スキルのインターバル（ms）
                 skill_interval = 15000;
                 
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
+                
                 // 移動速度
                 speed_guzai = 360;
                 
@@ -177,6 +183,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // スキルのインターバル（ms）
                 skill_interval = 10000;
+                
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
                 
                 // 移動速度
                 speed_guzai = 360;
@@ -373,6 +382,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 // スキルのインターバル（ms）
                 skill_interval = 10000;
                 
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
+                
                 // 移動速度
                 speed_guzai = 360;
                 
@@ -409,6 +421,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 // スキルのインターバル（ms）
                 skill_interval = 15000;
                 
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
+                
                 // 移動速度
                 speed_guzai = 360;
                 
@@ -444,6 +459,9 @@ Game::Game(const InitData& init) : IScene{ init }, m_state{ GameState::Countdown
                 
                 // スキルのインターバル（ms）
                 skill_interval = 10000;
+                
+                // スキルゲージの描画位置
+                skill_gauge_height = 100;
                 
                 // 移動速度
                 speed_guzai = 360;
@@ -765,21 +783,25 @@ void Game::update(){
             
             if (m_stopwatch_skill.ms() > skill_timer){
                 skillActive = false;
+                skillEnable = false;
                 switch (guzai_id) {
                     case 0:
                         speed_guzai /= 4;
                         
                         m_stopwatch_skill.reset();
+                        m_stopwatch_interval.reset();
                         m_stopwatch_interval.start();
                         break;
                     case 1:
                         m_position_guzai.y -= 160;
                         
                         m_stopwatch_skill.reset();
+                        m_stopwatch_interval.reset();
                         m_stopwatch_interval.start();
                         break;
                     case 2:
                         m_stopwatch_skill.reset();
+                        m_stopwatch_interval.reset();
                         m_stopwatch_interval.start();
                         break;
                     default:
@@ -788,9 +810,14 @@ void Game::update(){
             }
         }
         else{
-            if (guzai_input.Confirm.down() && skillEnable == true){
+            if (skillEnable == false){
+                if (m_stopwatch_interval.ms() - skill_interval_prev >= 1000){
+                    skill_interval_len += skill_interval / (skill_interval / 10);
+                    skill_interval_prev = m_stopwatch_interval.ms();
+                }
+            }
+            if (guzai_input.Confirm.down() && skillEnable == true && skillActive == false){
                 skillActive = true;
-                skillEnable = false;
                 switch (guzai_id) {
                     case 0:
                         speed_guzai *= 4;
@@ -809,8 +836,11 @@ void Game::update(){
                         break;
                 }
             }
-            if (skillEnable == false && m_stopwatch_interval.ms() >= skill_interval){
+            
+            if (skillEnable == false && m_stopwatch_interval.ms() > skill_interval){
                 skillEnable = true;
+                skill_interval_len = 0;
+                skill_interval_prev = 0;
                 switch (guzai_id) {
                     case 0:
                         m_stopwatch_interval.reset();
@@ -1055,6 +1085,16 @@ void Game::draw() const{
     
     
     // --------------------------------------------------------------------------------------------
+    // スキルのクールダウンを描画
+    // --------------------------------------------------------------------------------------------
+    
+    if (skillEnable == false){
+        RectF(Arg::center(m_position_guzai.x, m_position_guzai.y - skill_gauge_height), skill_interval/100 + 4, 14).draw(ColorF(0, 0, 0));
+        Rect(m_position_guzai.x - skill_interval/100/2 + 1, m_position_guzai.y - skill_gauge_height - 5, skill_interval_len, 10).draw(ColorF{1, 0, 0});
+    }
+    
+    
+    // --------------------------------------------------------------------------------------------
     // GameStateに応じた描画
     // --------------------------------------------------------------------------------------------
     
@@ -1076,16 +1116,7 @@ void Game::draw() const{
         s3d::String timeText = U"{:0>2}:{:0>2}"_fmt(minutes, seconds);
         FontAsset(U"StopwatchFont")(timeText).draw(Vec2(Scene::Width() - 200, 38), Palette::Black);
     }
-    else if (m_state == GameState::Finished){
-        FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
-    }
-    
-    
-    // --------------------------------------------------------------------------------------------
-    // ミニゲーム用の描画
-    // --------------------------------------------------------------------------------------------
-    
-    if(m_state == GameState::MiniGame)
+    else if(m_state == GameState::MiniGame)
     {
         Rect{Arg::center(Scene::Center()), 1280, 720}.draw(ColorF{Palette::Black, 0.5});
         
@@ -1113,6 +1144,9 @@ void Game::draw() const{
             p1_texture[p1_state].resized(512).mirrored().drawAt(Scene::Center()+Point(-100, 100));
             p2_texture[p2_state].resized(512).drawAt(Scene::Center()+Point(100, 100));
         }
+    }
+    else if (m_state == GameState::Finished){
+        FontAsset(U"CountDownFont")(U"Finish !!!").drawAt(Scene::Center(), Palette::Red);
     }
     
 
