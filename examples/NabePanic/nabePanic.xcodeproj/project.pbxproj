@@ -37,14 +37,19 @@
 		2C5C471126B4F08E005E8C85 /* libzlib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C5C471026B4F08E005E8C85 /* libzlib.a */; };
 		2C6906D82298140F00A427D0 /* engine in Resources */ = {isa = PBXBuildFile; fileRef = 2C6906D72298140F00A427D0 /* engine */; };
 		2CD8412C283263B2005013A6 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD8412B283263B2005013A6 /* libboost_filesystem.a */; };
-		C782C4AA2B7C30C500CFC36C /* Mob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4A92B7C30C500CFC36C /* Mob.cpp */; };
-		C782C4B82B7C314100CFC36C /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4AB2B7C314100CFC36C /* Story.cpp */; };
-		C782C4B92B7C314100CFC36C /* Result.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4AC2B7C314100CFC36C /* Result.cpp */; };
-		C782C4BA2B7C314100CFC36C /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4AE2B7C314100CFC36C /* Title.cpp */; };
-		C782C4BB2B7C314100CFC36C /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4AF2B7C314100CFC36C /* Game.cpp */; };
-		C782C4BC2B7C314100CFC36C /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4B12B7C314100CFC36C /* SelectEquipment.cpp */; };
-		C782C4BD2B7C314100CFC36C /* SelectStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4B42B7C314100CFC36C /* SelectStage.cpp */; };
-		C782C4C02B7C31C900CFC36C /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C782C4BF2B7C31C900CFC36C /* Controller.cpp */; };
+		C73AA6F12B7C3A67001A7500 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6F02B7C3A67001A7500 /* Controller.cpp */; };
+		C73AA7082B7C3AA3001A7500 /* Mob.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6F22B7C3AA2001A7500 /* Mob.cpp */; };
+		C73AA7092B7C3AA3001A7500 /* HowToPlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6F52B7C3AA2001A7500 /* HowToPlay.cpp */; };
+		C73AA70A2B7C3AA3001A7500 /* VideoLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6F72B7C3AA2001A7500 /* VideoLoader.cpp */; };
+		C73AA70B2B7C3AA3001A7500 /* Story.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6F92B7C3AA2001A7500 /* Story.cpp */; };
+		C73AA70C2B7C3AA3001A7500 /* Tableware.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6FA2B7C3AA2001A7500 /* Tableware.cpp */; };
+		C73AA70D2B7C3AA3001A7500 /* Result.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6FC2B7C3AA2001A7500 /* Result.cpp */; };
+		C73AA70E2B7C3AA3001A7500 /* Title.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA6FF2B7C3AA2001A7500 /* Title.cpp */; };
+		C73AA70F2B7C3AA3001A7500 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA7002B7C3AA2001A7500 /* Game.cpp */; };
+		C73AA7102B7C3AA3001A7500 /* SelectEquipment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA7012B7C3AA2001A7500 /* SelectEquipment.cpp */; };
+		C73AA7112B7C3AA3001A7500 /* SelectStage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA7022B7C3AA2001A7500 /* SelectStage.cpp */; };
+		C73AA7122B7C3AA3001A7500 /* Ingredient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA7032B7C3AA2001A7500 /* Ingredient.cpp */; };
+		C73AA7162B7C3ADD001A7500 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C73AA7152B7C3ADD001A7500 /* stdafx.cpp */; };
 		C782C4C22B7C333000CFC36C /* nabePanic in Resources */ = {isa = PBXBuildFile; fileRef = C782C4C12B7C333000CFC36C /* nabePanic */; };
 /* End PBXBuildFile section */
 
@@ -81,24 +86,34 @@
 		2C5C471026B4F08E005E8C85 /* libzlib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlib.a; path = ../../lib/macOS/zlib/libzlib.a; sourceTree = "<group>"; };
 		2C6906D72298140F00A427D0 /* engine */ = {isa = PBXFileReference; lastKnownFileType = folder; name = engine; path = App/engine; sourceTree = "<group>"; };
 		2CD8412B283263B2005013A6 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../../lib/macOS/boost/libboost_filesystem.a; sourceTree = "<group>"; };
-		C782C4A82B7C30C500CFC36C /* Mob.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Mob.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Mob.hpp"; sourceTree = "<group>"; };
-		C782C4A92B7C30C500CFC36C /* Mob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mob.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Mob.cpp"; sourceTree = "<group>"; };
-		C782C4AB2B7C314100CFC36C /* Story.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Story.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Story.cpp"; sourceTree = "<group>"; };
-		C782C4AC2B7C314100CFC36C /* Result.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Result.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Result.cpp"; sourceTree = "<group>"; };
-		C782C4AD2B7C314100CFC36C /* Story.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Story.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Story.hpp"; sourceTree = "<group>"; };
-		C782C4AE2B7C314100CFC36C /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Title.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Title.cpp"; sourceTree = "<group>"; };
-		C782C4AF2B7C314100CFC36C /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Game.cpp"; sourceTree = "<group>"; };
-		C782C4B02B7C314100CFC36C /* Common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Common.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Common.hpp"; sourceTree = "<group>"; };
-		C782C4B12B7C314100CFC36C /* SelectEquipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectEquipment.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/SelectEquipment.cpp"; sourceTree = "<group>"; };
-		C782C4B22B7C314100CFC36C /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Game.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Game.hpp"; sourceTree = "<group>"; };
-		C782C4B32B7C314100CFC36C /* SelectEquipment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SelectEquipment.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/SelectEquipment.hpp"; sourceTree = "<group>"; };
-		C782C4B42B7C314100CFC36C /* SelectStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectStage.cpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/SelectStage.cpp"; sourceTree = "<group>"; };
-		C782C4B52B7C314100CFC36C /* Title.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Title.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Title.hpp"; sourceTree = "<group>"; };
-		C782C4B62B7C314100CFC36C /* SelectStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SelectStage.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/SelectStage.hpp"; sourceTree = "<group>"; };
-		C782C4B72B7C314100CFC36C /* Result.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Result.hpp; path = "../../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Scenes/Result.hpp"; sourceTree = "<group>"; };
-		C782C4BE2B7C31C900CFC36C /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Controller.hpp; path = "../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Controller.hpp"; sourceTree = "<group>"; };
-		C782C4BF2B7C31C900CFC36C /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Controller.cpp; path = "../../../../../Desktop/BNS-GameJam/examples/bns-gamejam/src/Controller.cpp"; sourceTree = "<group>"; };
+		C73AA6EF2B7C3A67001A7500 /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
+		C73AA6F02B7C3A67001A7500 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		C73AA6F22B7C3AA2001A7500 /* Mob.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mob.cpp; sourceTree = "<group>"; };
+		C73AA6F32B7C3AA2001A7500 /* Title.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Title.hpp; sourceTree = "<group>"; };
+		C73AA6F42B7C3AA2001A7500 /* HowToPlay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HowToPlay.hpp; sourceTree = "<group>"; };
+		C73AA6F52B7C3AA2001A7500 /* HowToPlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HowToPlay.cpp; sourceTree = "<group>"; };
+		C73AA6F62B7C3AA2001A7500 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		C73AA6F72B7C3AA2001A7500 /* VideoLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoLoader.cpp; sourceTree = "<group>"; };
+		C73AA6F82B7C3AA2001A7500 /* VideoLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VideoLoader.hpp; sourceTree = "<group>"; };
+		C73AA6F92B7C3AA2001A7500 /* Story.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Story.cpp; sourceTree = "<group>"; };
+		C73AA6FA2B7C3AA2001A7500 /* Tableware.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tableware.cpp; sourceTree = "<group>"; };
+		C73AA6FB2B7C3AA2001A7500 /* Tableware.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tableware.hpp; sourceTree = "<group>"; };
+		C73AA6FC2B7C3AA2001A7500 /* Result.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Result.cpp; sourceTree = "<group>"; };
+		C73AA6FD2B7C3AA2001A7500 /* Result.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Result.hpp; sourceTree = "<group>"; };
+		C73AA6FE2B7C3AA2001A7500 /* Mob.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mob.hpp; sourceTree = "<group>"; };
+		C73AA6FF2B7C3AA2001A7500 /* Title.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Title.cpp; sourceTree = "<group>"; };
+		C73AA7002B7C3AA2001A7500 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		C73AA7012B7C3AA2001A7500 /* SelectEquipment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectEquipment.cpp; sourceTree = "<group>"; };
+		C73AA7022B7C3AA2001A7500 /* SelectStage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectStage.cpp; sourceTree = "<group>"; };
+		C73AA7032B7C3AA2001A7500 /* Ingredient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ingredient.cpp; sourceTree = "<group>"; };
+		C73AA7042B7C3AA2001A7500 /* Story.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Story.hpp; sourceTree = "<group>"; };
+		C73AA7052B7C3AA2001A7500 /* SelectEquipment.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SelectEquipment.hpp; sourceTree = "<group>"; };
+		C73AA7062B7C3AA2001A7500 /* SelectStage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SelectStage.hpp; sourceTree = "<group>"; };
+		C73AA7072B7C3AA3001A7500 /* Ingredient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ingredient.hpp; sourceTree = "<group>"; };
+		C73AA7142B7C3ADD001A7500 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		C73AA7152B7C3ADD001A7500 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
 		C782C4C12B7C333000CFC36C /* nabePanic */ = {isa = PBXFileReference; lastKnownFileType = folder; name = nabePanic; path = App/nabePanic; sourceTree = "<group>"; };
+		C782C4CD2B7C373B00CFC36C /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,11 +178,13 @@
 		2C1778981CE0AA7C00BB8AD0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C782C4A72B7C309E00CFC36C /* Scenes */,
-				C782C4A62B7C307D00CFC36C /* Charactors */,
+				C73AA7182B7C3D94001A7500 /* Utils */,
+				C73AA7172B7C3D76001A7500 /* Scenes */,
+				C73AA7152B7C3ADD001A7500 /* stdafx.cpp */,
+				C73AA7142B7C3ADD001A7500 /* stdafx.h */,
+				C73AA7132B7C3AAA001A7500 /* Charactors */,
 				2C1778991CE0AA7C00BB8AD0 /* Main.cpp */,
-				C782C4BF2B7C31C900CFC36C /* Controller.cpp */,
-				C782C4BE2B7C31C900CFC36C /* Controller.hpp */,
+				C782C4CD2B7C373B00CFC36C /* Common.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -206,33 +223,49 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C782C4A62B7C307D00CFC36C /* Charactors */ = {
+		C73AA7132B7C3AAA001A7500 /* Charactors */ = {
 			isa = PBXGroup;
 			children = (
-				C782C4A92B7C30C500CFC36C /* Mob.cpp */,
-				C782C4A82B7C30C500CFC36C /* Mob.hpp */,
+				C73AA6FA2B7C3AA2001A7500 /* Tableware.cpp */,
+				C73AA6FB2B7C3AA2001A7500 /* Tableware.hpp */,
+				C73AA7032B7C3AA2001A7500 /* Ingredient.cpp */,
+				C73AA7072B7C3AA3001A7500 /* Ingredient.hpp */,
+				C73AA6F22B7C3AA2001A7500 /* Mob.cpp */,
+				C73AA6FE2B7C3AA2001A7500 /* Mob.hpp */,
 			);
 			path = Charactors;
 			sourceTree = "<group>";
 		};
-		C782C4A72B7C309E00CFC36C /* Scenes */ = {
+		C73AA7172B7C3D76001A7500 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				C782C4B02B7C314100CFC36C /* Common.hpp */,
-				C782C4AF2B7C314100CFC36C /* Game.cpp */,
-				C782C4B22B7C314100CFC36C /* Game.hpp */,
-				C782C4AC2B7C314100CFC36C /* Result.cpp */,
-				C782C4B72B7C314100CFC36C /* Result.hpp */,
-				C782C4B12B7C314100CFC36C /* SelectEquipment.cpp */,
-				C782C4B32B7C314100CFC36C /* SelectEquipment.hpp */,
-				C782C4B42B7C314100CFC36C /* SelectStage.cpp */,
-				C782C4B62B7C314100CFC36C /* SelectStage.hpp */,
-				C782C4AB2B7C314100CFC36C /* Story.cpp */,
-				C782C4AD2B7C314100CFC36C /* Story.hpp */,
-				C782C4AE2B7C314100CFC36C /* Title.cpp */,
-				C782C4B52B7C314100CFC36C /* Title.hpp */,
+				C73AA6F92B7C3AA2001A7500 /* Story.cpp */,
+				C73AA7042B7C3AA2001A7500 /* Story.hpp */,
+				C73AA6FF2B7C3AA2001A7500 /* Title.cpp */,
+				C73AA6F32B7C3AA2001A7500 /* Title.hpp */,
+				C73AA7002B7C3AA2001A7500 /* Game.cpp */,
+				C73AA6F62B7C3AA2001A7500 /* Game.hpp */,
+				C73AA6F52B7C3AA2001A7500 /* HowToPlay.cpp */,
+				C73AA6F42B7C3AA2001A7500 /* HowToPlay.hpp */,
+				C73AA6FC2B7C3AA2001A7500 /* Result.cpp */,
+				C73AA6FD2B7C3AA2001A7500 /* Result.hpp */,
+				C73AA7012B7C3AA2001A7500 /* SelectEquipment.cpp */,
+				C73AA7052B7C3AA2001A7500 /* SelectEquipment.hpp */,
+				C73AA7022B7C3AA2001A7500 /* SelectStage.cpp */,
+				C73AA7062B7C3AA2001A7500 /* SelectStage.hpp */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C73AA7182B7C3D94001A7500 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C73AA6F72B7C3AA2001A7500 /* VideoLoader.cpp */,
+				C73AA6F82B7C3AA2001A7500 /* VideoLoader.hpp */,
+				C73AA6F02B7C3A67001A7500 /* Controller.cpp */,
+				C73AA6EF2B7C3A67001A7500 /* Controller.hpp */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,15 +337,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C782C4AA2B7C30C500CFC36C /* Mob.cpp in Sources */,
-				C782C4C02B7C31C900CFC36C /* Controller.cpp in Sources */,
-				C782C4BC2B7C314100CFC36C /* SelectEquipment.cpp in Sources */,
+				C73AA7112B7C3AA3001A7500 /* SelectStage.cpp in Sources */,
+				C73AA7082B7C3AA3001A7500 /* Mob.cpp in Sources */,
+				C73AA7092B7C3AA3001A7500 /* HowToPlay.cpp in Sources */,
+				C73AA70D2B7C3AA3001A7500 /* Result.cpp in Sources */,
+				C73AA7122B7C3AA3001A7500 /* Ingredient.cpp in Sources */,
+				C73AA7162B7C3ADD001A7500 /* stdafx.cpp in Sources */,
 				2C17789A1CE0AA7C00BB8AD0 /* Main.cpp in Sources */,
-				C782C4B92B7C314100CFC36C /* Result.cpp in Sources */,
-				C782C4BD2B7C314100CFC36C /* SelectStage.cpp in Sources */,
-				C782C4BB2B7C314100CFC36C /* Game.cpp in Sources */,
-				C782C4B82B7C314100CFC36C /* Story.cpp in Sources */,
-				C782C4BA2B7C314100CFC36C /* Title.cpp in Sources */,
+				C73AA70A2B7C3AA3001A7500 /* VideoLoader.cpp in Sources */,
+				C73AA7102B7C3AA3001A7500 /* SelectEquipment.cpp in Sources */,
+				C73AA6F12B7C3A67001A7500 /* Controller.cpp in Sources */,
+				C73AA70E2B7C3AA3001A7500 /* Title.cpp in Sources */,
+				C73AA70B2B7C3AA3001A7500 /* Story.cpp in Sources */,
+				C73AA70C2B7C3AA3001A7500 /* Tableware.cpp in Sources */,
+				C73AA70F2B7C3AA3001A7500 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
